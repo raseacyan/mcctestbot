@@ -59,6 +59,7 @@ app.post('/test',function(req,res){
 
     console.log('USER ID', user_id);
 
+
     let data = {
        "receiver":user_id,
        "min_api_version":1,
@@ -68,7 +69,7 @@ app.post('/test',function(req,res){
        },
        "tracking_data":"tracking data",
        "type":"text",
-       "text":"Thank you!"
+       "text": "Thank you!"+req.body.name
     }
 
     
