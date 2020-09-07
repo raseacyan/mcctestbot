@@ -47,8 +47,12 @@ app.get('/test',function(req,res){
 });
 
 
-app.get('/newpage',function(req,res){    
-     res.render('newpage.ejs', {title:"Hello"});
+app.get('/newpage',function(req,res){ 
+     let data = {
+        title:"Hello",
+        name:"Effy"
+     }   
+     res.render('newpage.ejs', data);
 });
 
 app.post('/test',function(req,res){
