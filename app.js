@@ -174,7 +174,7 @@ const whoAmI = (message, response) => {
 }
 
 const textReply = (message, response) => {
-    let bot_message = TextMessage(`You have sent message: ${message.text}`);    
+    let bot_message = new TextMessage(`You have sent message: ${message.text}`);    
     response.send(bot_message);
 }
 
