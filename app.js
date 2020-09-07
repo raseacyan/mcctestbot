@@ -48,7 +48,7 @@ app.get('/test',function(req,res){
 
 
 app.get('/newpage',function(req,res){    
-     res.render('newpage.ejs');
+     res.render('newpage.ejs', {title:"Hello"});
 });
 
 app.post('/test',function(req,res){
