@@ -46,6 +46,11 @@ app.get('/test',function(req,res){
      res.render('test.ejs');
 });
 
+
+app.get('/newpage',function(req,res){    
+     res.render('newpage.ejs');
+});
+
 app.post('/test',function(req,res){
 
     console.log('USER ID', user_id);
