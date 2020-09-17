@@ -59,7 +59,7 @@ app.post('/test',function(req,res){
 
     console.log('USER ID', user_id);
 
-
+    
     let data = {
        "receiver":user_id,
        "min_api_version":1,
@@ -136,6 +136,7 @@ bot.onTextMessage(/./, (message, response) => {
     const text = message.text.toLowerCase();
 
     console.log('MESSAGE:', message);
+    console.log('USER', response.userProfile);
     
     switch(text){
         case "text":
