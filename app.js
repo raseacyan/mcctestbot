@@ -139,6 +139,9 @@ bot.onTextMessage(/./, (message, response) => {
     console.log('USER', response.userProfile);
     
     switch(text){
+        case "tealeaf":
+            chooseCustomerType(message, response);
+            break;
         case "text":
             textReply(message, response);
             break; 
@@ -242,27 +245,34 @@ const richMediaReply = (message, response) => {
 
 //https://developers.viber.com/docs/tools/keyboard-examples/
 
-const keyboardReply = (message, response) => {
+const chooseCustomerType = (message, response) => {
     let SAMPLE_KEYBOARD = {
         "Type": "keyboard",
         "Revision": 1,
         "Buttons": [
-            {
-                "Columns": 6,
-                "Rows": 1,
-                "BgColor": "#2db9b9",
-                "BgMediaType": "gif",
-                "BgMedia": "http://www.url.by/test.gif",
-                "BgLoop": true,
-                "ActionType": "open-url",
-                "ActionBody": "https://en.wikipedia.org/wiki/Effy_Stonem",
-                "Image": "https://upload.wikimedia.org/wikipedia/en/6/69/Effy_Stonem.jpg",
-                "Text": "Key text",
-                "TextVAlign": "middle",
-                "TextHAlign": "center",
-                "TextOpacity": 60,
-                "TextSize": "regular"
-            }
+                {
+                    "Columns": 3,
+                    "Rows": 2,
+                    "Text": "<font color=\"#494E67\">Smoking</font><br><br>",
+                    "TextSize": "medium",
+                    "TextHAlign": "center",
+                    "TextVAlign": "bottom",
+                    "ActionType": "reply",
+                    "ActionBody": "Smoking",
+                    "BgColor": "#f7bb3f",
+                    "Image": "https: //s12.postimg.org/ti4alty19/smoke.png"
+                }, {
+                    "Columns": 3,
+                    "Rows": 2,
+                    "Text": "<font color=\"#494E67\">Non Smoking</font><br><br>",
+                    "TextSize": "medium",
+                    "TextHAlign": "center",
+                    "TextVAlign": "bottom",
+                    "ActionType": "reply",
+                    "ActionBody": "Non smoking",
+                    "BgColor": "# f6f7f9",
+                    "Image": "https: //s14.postimg.org/us7t38az5/Nonsmoke.png"
+                }
         ]
     };
 
