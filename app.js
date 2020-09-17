@@ -20,27 +20,16 @@ const app = express();
 
 
 let user_id = '';
+
 let SAMPLE_KEYBOARD = {
         "Type": "keyboard",
-        "Revision": 1,
-        "Buttons": [
-            {
-                "Columns": 6,
-                "Rows": 1,
-                "BgColor": "#2db9b9",
-                "BgMediaType": "gif",
-                "BgMedia": "http://www.url.by/test.gif",
-                "BgLoop": true,
-                "ActionType": "open-url",
-                "ActionBody": "https://en.wikipedia.org/wiki/Effy_Stonem",
-                "Image": "https://upload.wikimedia.org/wikipedia/en/6/69/Effy_Stonem.jpg",
-                "Text": "Key text",
-                "TextVAlign": "middle",
-                "TextHAlign": "center",
-                "TextOpacity": 60,
-                "TextSize": "regular"
-            }
-        ]
+        "DefaultHeight": true,
+        "Buttons": [{
+            "ActionType": "reply",
+            "ActionBody": "reply to me",
+            "Text": "Key text",
+            "TextSize": "regular"
+        }]
     };
 
 // Creating the bot with access token, name and avatar
@@ -297,7 +286,7 @@ const keyboardReply = (message, response) => {
 }
 
 const chooseCustomerType = (message, response) => {
-    let bot_message = new TextMessage(`Are you a new customer?`);    
+    let bot_message = new TextMessage(`Are you a new customer?`, SAMPLE_KEYBOARD);    
     response.send(bot_message);
 }
 
