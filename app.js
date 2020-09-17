@@ -21,7 +21,7 @@ const app = express();
 
 let user_id = '';
 
-let SAMPLE_KEYBOARD = {
+let KEYBOARD_JSON = {
         "Type": "keyboard",
         "DefaultHeight": true,
         "Buttons": [{
@@ -131,6 +131,13 @@ bot.onError(err => console.log('ON ERR: ',err));
 bot.onSubscribe(response => {
     say(response, `Hi there ${response.userProfile.name}. I am ${bot.name}! Feel free to ask me if a web site is down for everyone or just you. Just send me a name of a website and I'll do the rest!`);
 });
+
+
+const message = new TextMessage("new text",KEYBOARD_JSON,null,null,null,3);
+
+bot.onConversationStarted((userProfile, isSubscribed, context) =>
+    bot.sendMessage(userProfile,message)
+);
 
 
 
@@ -286,7 +293,7 @@ const keyboardReply = (message, response) => {
 }
 
 const chooseCustomerType = (message, response) => {
-    let bot_message = new TextMessage(`Are you a new customer?`, SAMPLE_KEYBOARD);    
+    let bot_message = new TextMessage(`Are you a new customer?`);    
     response.send(bot_message);
 }
 
