@@ -243,7 +243,7 @@ const richMediaReply = (message, response) => {
 
 }
 
-/https://developers.viber.com/docs/tools/keyboard-examples/
+//https://developers.viber.com/docs/tools/keyboard-examples/
 
 const keyboardReply = (message, response) => {
     let SAMPLE_KEYBOARD = {
