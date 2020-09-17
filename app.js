@@ -245,43 +245,6 @@ const richMediaReply = (message, response) => {
 
 //https://developers.viber.com/docs/tools/keyboard-examples/
 
-const chooseCustomerType = (message, response) => {
-    let SAMPLE_KEYBOARD = {
-        "Type": "keyboard",
-        "Revision": 1,
-        "Buttons": [
-            {
-        "Columns": 3,
-        "Rows": 2,
-        "Text": "<font color=\"#494E67\">Smoking</font><br><br>",
-        "TextSize": "medium",
-        "TextHAlign": "center",
-        "TextVAlign": "bottom",
-        "ActionType": "reply",
-        "ActionBody": "Smoking",
-        "BgColor": "#f7bb3f",
-        "Image": "https: //s12.postimg.org/ti4alty19/smoke.png"
-    }, {
-        "Columns": 3,
-        "Rows": 2,
-        "Text": "<font color=\"#494E67\">Non Smoking</font><br><br>",
-        "TextSize": "medium",
-        "TextHAlign": "center",
-        "TextVAlign": "bottom",
-        "ActionType": "reply",
-        "ActionBody": "Non smoking",
-        "BgColor": "# f6f7f9",
-        "Image": "https: //s14.postimg.org/us7t38az5/Nonsmoke.png"
-    }
-        ]
-    };
-
-    let bot_message = new KeyboardMessage(SAMPLE_KEYBOARD);
-    console.log('KEYBOARD: ', bot_message);
-    response.send(bot_message);
-}
-
-
 const keyboardReply = (message, response) => {
     let SAMPLE_KEYBOARD = {
         "Type": "keyboard",
@@ -310,6 +273,36 @@ const keyboardReply = (message, response) => {
     console.log('KEYBOARD: ', bot_message);
     response.send(bot_message);
 }
+
+const chooseCustomerType = (message, response) => {
+    const SAMPLE_RICH_MEDIA = {
+    "ButtonsGroupColumns": 6,
+    "ButtonsGroupRows": 3,
+    "BgColor": "#ededed",
+    "Buttons": [        
+        {
+            "Columns":6,
+            "Rows":3,
+            "ActionType":"reply",
+            "ActionBody": "click",
+            "Text":"Click",
+            "TextSize":"large",
+            "TextVAlign":"middle",
+            "TextHAlign":"middle",
+        }
+    ]
+    };
+
+    let bot_message = new RichMediaMessage(SAMPLE_RICH_MEDIA);
+    
+    response.send(bot_message).catch(error=>{
+        console.error('ERROR', error);
+        process.exit(1);
+    });
+}
+
+
+
 
 
 
