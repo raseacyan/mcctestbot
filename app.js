@@ -243,6 +243,37 @@ const richMediaReply = (message, response) => {
 
 }
 
+/https://developers.viber.com/docs/tools/keyboard-examples/
+
+const keyboardReply = (message, response) => {
+    let SAMPLE_KEYBOARD = {
+        "Type": "keyboard",
+        "Revision": 1,
+        "Buttons": [
+            {
+                "Columns": 6,
+                "Rows": 1,
+                "BgColor": "#2db9b9",
+                "BgMediaType": "gif",
+                "BgMedia": "http://www.url.by/test.gif",
+                "BgLoop": true,
+                "ActionType": "open-url",
+                "ActionBody": "https://en.wikipedia.org/wiki/Effy_Stonem",
+                "Image": "https://upload.wikimedia.org/wikipedia/en/6/69/Effy_Stonem.jpg",
+                "Text": "Key text",
+                "TextVAlign": "middle",
+                "TextHAlign": "center",
+                "TextOpacity": 60,
+                "TextSize": "regular"
+            }
+        ]
+    };
+
+    let bot_message = new KeyboardMessage(SAMPLE_KEYBOARD);
+    console.log('KEYBOARD: ', bot_message);
+    response.send(bot_message);
+}
+
 //https://developers.viber.com/docs/tools/keyboard-examples/
 
 const chooseCustomerType = (message, response) => {
@@ -280,6 +311,8 @@ const chooseCustomerType = (message, response) => {
     console.log('KEYBOARD: ', bot_message);
     response.send(bot_message);
 }
+
+
 
 
 
