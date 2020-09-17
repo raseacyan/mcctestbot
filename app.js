@@ -245,7 +245,7 @@ const richMediaReply = (message, response) => {
 
 //https://developers.viber.com/docs/tools/keyboard-examples/
 
-const keyboardReply = (message, response) => {
+keyboardReply = (message, response) => {
     let SAMPLE_KEYBOARD = {
         "Type": "keyboard",
         "Revision": 1,
