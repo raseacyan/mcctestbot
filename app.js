@@ -297,30 +297,10 @@ const keyboardReply = (message, response) => {
 }
 
 const registerUser = (message, response) => {
-    const button = {
-    "ButtonsGroupColumns": 3,
-    "ButtonsGroupRows": 1,
-    "BgColor": "#FFFFFF",
-    "Buttons": [         
-        {
-        "Columns":3,
-        "Rows":1,
-        "Text": "Register",
-        "ActionType":"open-url",
-        "ActionBody":"https://www.google.com",
-        "TextSize":"medium",
-        "TextVAlign":"middle",
-        "TextHAlign":"left"
-        }
-        
-    ]
-    };
-
-    let bot_message = new RichMediaMessage(button);
-    
-    response.send(bot_message).catch(error=>{
-        console.error('ERROR', error);
-        process.exit(1);
+    let bot_message1 = new TextMessage(`Click on following link to register`); 
+    let bot_message2 = new UrlMessage(process.env.APP_URL + '/test/');   
+    response.send(bot_message1).then(()=>{
+        return response.send(bot_message2);
     });
 }
 
