@@ -105,6 +105,11 @@ app.post('/register',function(req,res){
        
 });
 
+app.get('/admin/merchants',function(req,res){   
+    
+     res.render('merchans.ejs');
+});
+
 
 
 
