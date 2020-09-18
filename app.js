@@ -160,8 +160,8 @@ bot.onTextMessage(/./, (message, response) => {
     console.log('MESSAGE:', message);
     //console.log('USER', response.userProfile);
 
-    currentUser.id = reponse.userProfile.id;
-    currentUser.name = reponse.userProfile.name;
+    currentUser.id = response.userProfile.id;
+    currentUser.name = response.userProfile.name;
 
     console.log('CURRENT USER', currentUser);
 
