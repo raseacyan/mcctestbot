@@ -361,8 +361,15 @@ const keyboardReply = (message, response) => {
 
 
 
-const registerUser = (message, response) => {
+const registerUser = async (message, response) => {
 
+    const userRef = db.collection('users').doc(currentUser.id);
+    const user = await userRef.get();
+    if (!user.exists) {
+      console.log('No such document!');
+    } else {
+      console.log('Document data:', user.data());
+    }
 
     
 
