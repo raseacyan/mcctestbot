@@ -21,16 +21,7 @@ const app = express();
 
 let user_id = '';
 
-let KEYBOARD_JSON = {
-        "Type": "keyboard",
-        "DefaultHeight": true,
-        "Buttons": [{
-            "ActionType": "reply",
-            "ActionBody": "reply to me",
-            "Text": "Key text",
-            "TextSize": "regular"
-        }]
-    };
+
 
 // Creating the bot with access token, name and avatar
 const bot = new ViberBot({
@@ -132,12 +123,22 @@ bot.onSubscribe(response => {
     say(response, `Hi there ${response.userProfile.name}. I am ${bot.name}! Feel free to ask me if a web site is down for everyone or just you. Just send me a name of a website and I'll do the rest!`);
 });
 
-
+/*
 const message = new TextMessage("new text",KEYBOARD_JSON,null,null,null,3);
+let KEYBOARD_JSON = {
+        "Type": "keyboard",
+        "DefaultHeight": true,
+        "Buttons": [{
+            "ActionType": "reply",
+            "ActionBody": "reply to me",
+            "Text": "Key text",
+            "TextSize": "regular"
+        }]
+    };
 
 bot.onConversationStarted((userProfile, isSubscribed, context) =>
     bot.sendMessage(userProfile,message)
-);
+);*/
 
 
 
