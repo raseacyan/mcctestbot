@@ -51,8 +51,11 @@ app.get('/test',function(req,res){
 });
 
 
-app.get('/register',function(req,res){    
-     res.render('register.ejs');
+app.get('/register',function(req,res){   
+      let data = {
+        user_name: currentUser.name,
+      } 
+     res.render('register.ejs', {data:data});
 });
 
 
