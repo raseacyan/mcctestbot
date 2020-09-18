@@ -15,6 +15,8 @@ const RichMediaMessage = require('viber-bot').Message.RichMedia;
 const KeyboardMessage = require('viber-bot').Message.Keyboard;
 const PictureMessage = require('viber-bot').Message.Picture;
 
+const APP_URL = process.env.APP_URL;
+
 
 const app = express(); 
 
@@ -47,6 +49,13 @@ app.get('/',function(req,res){
 app.get('/test',function(req,res){    
      res.render('test.ejs');
 });
+
+
+app.get('/register',function(req,res){    
+     res.render('register.ejs');
+});
+
+
 
 
 app.get('/newpage',function(req,res){ 
@@ -302,18 +311,11 @@ const keyboardReply = (message, response) => {
 
 const registerUser = (message, response) => {
     let bot_message1 = new TextMessage(`Click on following link to register`); 
-    let bot_message2 = new UrlMessage(process.env.APP_URL + '/test/');   
+    let bot_message2 = new UrlMessage(APP_URL + '/register/');   
     response.send(bot_message1).then(()=>{
         return response.send(bot_message2);
     });
 }
-
-
-
-
-
-
-
 
 
 function defaultReply(message, response){
