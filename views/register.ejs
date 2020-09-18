@@ -10,8 +10,11 @@
   
   
 	<form id="form" action="#" method="post">
-    <labelf for="name">What is your name</label>
+    <labelf for="name">What is your name</label><br>
     <input type="text" name="name" value="<%= data.user_name  %>"/>
+
+    <labelf for="name">What is your phone number</label><br>
+    <input type="tel" id="phone" name="phone" placeholder="09xxxxxxxxx" pattern="[0-9]{5,10}">
     
     <input type="submit" name="submit"/>
 
