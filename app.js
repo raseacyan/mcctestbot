@@ -61,8 +61,8 @@ app.get('/register',function(req,res){
 
 app.post('/register',function(req,res){   
     
-    console.log('Data from File:', req.body);
-    
+    console.log('Data from Form:', req.body);
+
     let data = {
        "receiver":currentUser.id,
        "min_api_version":1,
