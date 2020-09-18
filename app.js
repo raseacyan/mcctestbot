@@ -68,7 +68,7 @@ app.post('/register',function(req,res){
     currentUser.address = req.body.address;
 
     let data = {
-        id: currentUser.id,
+        viberid: currentUser.id,
         name: currentUser.name,
         phone: currentUser.phone,
         address: currentUser.address
@@ -76,7 +76,7 @@ app.post('/register',function(req,res){
 
    
 
-    db.collection('users').add(data)
+    db.collection('users').doc(currentUser.id).set(data)
     .then(()=>{
             let data = {
                    "receiver":currentUser.id,
@@ -359,15 +359,12 @@ const keyboardReply = (message, response) => {
     response.send(bot_message);
 }
 
+
+
 const registerUser = (message, response) => {
 
-    let user = db.collection('users').where('id', '==', currentUser.id).get();
-    console.log('FOUND USERS', user);
-    if (!user.exists) {
-      console.log('No such document!');
-    } else {
-      console.log('Document data:', user.data());
-    }
+
+    
 
     let bot_message1 = new TextMessage(`Click on following link to register`); 
     let bot_message2 = new UrlMessage(APP_URL + '/register/');   
