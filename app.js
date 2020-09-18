@@ -362,6 +362,7 @@ const keyboardReply = (message, response) => {
 const registerUser = (message, response) => {
 
     let user = db.collection('users').where('id', '==', currentUser.id).get();
+    console.log('FOUND USERS', user);
     if (!user.exists) {
       console.log('No such document!');
     } else {
