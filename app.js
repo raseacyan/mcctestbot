@@ -63,7 +63,7 @@ app.post('/register',function(req,res){
     
     console.log('Data from Form:', req.body);
 
-    res.json({'success':'success'});
+    res.json({'success':'success', 'data':req.body});
 
     /*let data = {
        "receiver":currentUser.id,
