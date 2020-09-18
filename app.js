@@ -360,6 +360,14 @@ const keyboardReply = (message, response) => {
 }
 
 const registerUser = (message, response) => {
+
+    let user = db.collection('cities').doc('SF').where('id', '==', currentUser.id).get();
+    if (!user.exists) {
+      console.log('No such document!');
+    } else {
+      console.log('Document data:', user.data());
+    }
+
     let bot_message1 = new TextMessage(`Click on following link to register`); 
     let bot_message2 = new UrlMessage(APP_URL + '/register/');   
     response.send(bot_message1).then(()=>{
