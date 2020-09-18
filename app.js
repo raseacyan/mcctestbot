@@ -59,6 +59,34 @@ app.get('/register',function(req,res){
 });
 
 
+app.post('/register',function(req,res){   
+    
+    console.log('Data from File:', req.body);
+    
+    let data = {
+       "receiver":currentUser.id,
+       "min_api_version":1,
+       "sender":{
+          "name":"Viber Bot",
+          "avatar":"http://avatar.example.com"
+       },
+       "tracking_data":"tracking data",
+       "type":"text",
+       "text": "Thank you!"+req.body.name
+    }
+
+    
+
+    fetch('https://chatapi.viber.com/pa/send_message', {
+        method: 'post',
+        body:    JSON.stringify(data),
+        headers: { 'Content-Type': 'application/json', 'X-Viber-Auth-Token': process.env.AUTH_TOKEN },
+    })
+    .then(res => res.json())
+    .then(json => console.log(json))   
+});
+
+
 
 
 app.get('/newpage',function(req,res){ 
