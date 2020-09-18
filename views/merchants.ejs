@@ -17,7 +17,19 @@
     <th>Name</th>
     <th>Phone</th>
     <th>Address</th>   
+    <th>Action</th>
   </tr>
+
+  <% data.forEach(function(user){ %>
+     <tr>
+      
+       <td><%= user.name %></td>
+       <td><%= user.phone %></td>
+       <td><%= user.address %></td>
+     
+       <td>Add product</td>
+     </tr>
+  <% }); %>
 
 
   

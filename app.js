@@ -124,7 +124,7 @@ app.get('/admin/merchants', async (req,res) => {
     });   
 
     console.log('ALL USERS', data);
-    res.render('merchants.ejs'); 
+    res.render('merchants.ejs', {data:data}); 
     
 });
 
