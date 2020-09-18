@@ -105,7 +105,7 @@ app.post('/register',function(req,res){
        
 });
 
-app.get('/admin/merchants',function(req,res){  
+app.get('/admin/merchants', async (req,res) => {  
     const usersRef = db.collection('users');
     const snapshot = await usersRef.get();
     if (snapshot.empty) {
