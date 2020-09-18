@@ -63,7 +63,11 @@ app.post('/register',function(req,res){
     
     console.log('Data from Form:', req.body);
 
-    //res.json({'success':'success', 'data':req.body});
+    currentUser.name = req.body.name;
+    currentUser.phone = req.body.phone;
+    currentUser.address = req.body.address;
+
+    console.log('CURENT USER DATA', currentUser);
 
     let data = {
        "receiver":currentUser.id,
