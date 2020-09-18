@@ -63,6 +63,8 @@ app.post('/register',function(req,res){
     
     console.log('Data from Form:', req.body);
 
+    res.json({'success':'success'});
+
     /*let data = {
        "receiver":currentUser.id,
        "min_api_version":1,
