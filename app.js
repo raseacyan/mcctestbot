@@ -367,17 +367,20 @@ const registerUser = async (message, response) => {
     const user = await userRef.get();
     if (!user.exists) {
       console.log('No such document!');
+        let bot_message1 = new TextMessage(`Click on following link to register`); 
+        let bot_message2 = new UrlMessage(APP_URL + '/register/');   
+        response.send(bot_message1).then(()=>{
+            return response.send(bot_message2);
+        });
     } else {
       console.log('Document data:', user.data());
+      let bot_message3 = new TextMessage(`You are already registered`);    
+      response.send(bot_message3);
     }
 
     
 
-    let bot_message1 = new TextMessage(`Click on following link to register`); 
-    let bot_message2 = new UrlMessage(APP_URL + '/register/');   
-    response.send(bot_message1).then(()=>{
-        return response.send(bot_message2);
-    });
+    
 }
 
 
