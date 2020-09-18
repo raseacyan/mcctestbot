@@ -63,9 +63,9 @@ app.post('/register',function(req,res){
     
     console.log('Data from Form:', req.body);
 
-    res.json({'success':'success', 'data':req.body});
+    //res.json({'success':'success', 'data':req.body});
 
-    /*let data = {
+    let data = {
        "receiver":currentUser.id,
        "min_api_version":1,
        "sender":{
@@ -85,7 +85,7 @@ app.post('/register',function(req,res){
         headers: { 'Content-Type': 'application/json', 'X-Viber-Auth-Token': process.env.AUTH_TOKEN },
     })
     .then(res => res.json())
-    .then(json => console.log(json))  */ 
+    .then(json => console.log('JSON', json))   
 });
 
 
