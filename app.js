@@ -361,7 +361,7 @@ const keyboardReply = (message, response) => {
 
 const registerUser = (message, response) => {
 
-    let user = db.collection('cities').doc('SF').where('id', '==', currentUser.id).get();
+    let user = db.collection('cities').where('id', '==', currentUser.id).get();
     if (!user.exists) {
       console.log('No such document!');
     } else {
