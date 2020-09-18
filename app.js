@@ -68,6 +68,7 @@ app.post('/register',function(req,res){
     currentUser.address = req.body.address;
 
     let data = {
+        id: currentUser.id,
         name: currentUser.name,
         phone: currentUser.phone,
         address: currentUser.address
@@ -75,7 +76,7 @@ app.post('/register',function(req,res){
 
    
 
-    db.collection('users').doc(currentUser.id).set(data)
+    db.collection('users').add(data)
     .then(()=>{
             let data = {
                    "receiver":currentUser.id,
