@@ -133,7 +133,7 @@ let KEYBOARD_JSON = {
             "TextSize": "regular"
         }]
     };
-    
+
 const message = new TextMessage("Welcome to my tea shop",KEYBOARD_JSON,null,null,null,3);
 
 
@@ -159,8 +159,8 @@ bot.onTextMessage(/./, (message, response) => {
     console.log('USER', response.userProfile);
     
     switch(text){
-        case "tealeaf":
-            chooseCustomerType(message, response);
+        case "register":
+            registerUser(message, response);
             break;
         case "text":
             textReply(message, response);
@@ -294,9 +294,32 @@ const keyboardReply = (message, response) => {
     response.send(bot_message);
 }
 
-const chooseCustomerType = (message, response) => {
-    let bot_message = new TextMessage(`Are you a new customer?`);    
-    response.send(bot_message);
+const registerUser = (message, response) => {
+    const button = {
+    "ButtonsGroupColumns": 3,
+    "ButtonsGroupRows": 1,
+    "BgColor": "#FFFFFF",
+    "Buttons": [         
+        {
+        "Columns":3,
+        "Rows":1,
+        "Text": "Register",
+        "ActionType":"open-url",
+        "ActionBody":"https://www.google.com",
+        "TextSize":"medium",
+        "TextVAlign":"middle",
+        "TextHAlign":"left"
+        }
+        
+    ]
+    };
+
+    let bot_message = new RichMediaMessage(button;
+    
+    response.send(bot_message).catch(error=>{
+        console.error('ERROR', error);
+        process.exit(1);
+    });
 }
 
 
