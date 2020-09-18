@@ -105,8 +105,26 @@ app.post('/register',function(req,res){
        
 });
 
-app.get('/admin/merchants',function(req,res){       
-     res.render('merchants.ejs');
+app.get('/admin/merchants',function(req,res){  
+    const usersRef = db.collection('users');
+    const snapshot = await usersRef.get();
+    if (snapshot.empty) {
+      console.log('No matching documents.');
+      return;
+    }  
+    let data = [];
+    snapshot.forEach(doc => {
+        let user = {};
+        user.id = doc.id;
+        user.phone = doc.data().phone;         
+        user.address = doc.data().address;
+        data.push(user); 
+       
+    });   
+
+    console.log('ALL USERS', data);
+    res.render('merchants.ejs'); 
+    
 });
 
 
