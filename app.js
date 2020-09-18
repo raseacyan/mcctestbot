@@ -314,7 +314,7 @@ const registerUser = (message, response) => {
     ]
     };
 
-    let bot_message = new RichMediaMessage(button;
+    let bot_message = new RichMediaMessage(button);
     
     response.send(bot_message).catch(error=>{
         console.error('ERROR', error);
