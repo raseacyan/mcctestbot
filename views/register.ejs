@@ -10,14 +10,14 @@
   
   
 	<form id="form" action="#" method="post">
-    <labelf for="name">Full Name</label><br>
-    <input type="text" name="name" value="<%= data.user_name  %>"/>
+    <label for="name">Full Name</label><br>
+    <input type="text" name="name" value="<%= data.user_name  %>"/><br>
 
-    <labelf for="name">phone number</label><br>
-    <input type="tel" name="phone" placeholder="09xxxxxxxxx" pattern="[0-9]{5,10}">
+    <label for="name">phone number</label><br>
+    <input type="tel" name="phone" pattern="[0-9]{5,15}">
 
-    <labelf for="name">Address</label><br>
-    <textarea name="address" rows="4" cols="50"></textarea>
+    <label for="name">Address</label><br>
+    <textarea name="address" rows="4" cols="50"></textarea><br>
     
     <input type="submit" name="submit"/>
 
