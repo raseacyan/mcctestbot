@@ -158,8 +158,12 @@ bot.onTextMessage(/./, (message, response) => {
     const text = message.text.toLowerCase();
 
     console.log('MESSAGE:', message);
-    console.log('USER', response.userProfile);
+    //console.log('USER', response.userProfile);
 
+    currentUser.id = reponse.userProfile.id;
+    currentUser.name = reponse.userProfile.name;
+
+    console.log('CURRENT USER', currentUser);
 
     
     switch(text){
