@@ -67,29 +67,41 @@ app.post('/register',function(req,res){
     currentUser.phone = req.body.phone;
     currentUser.address = req.body.address;
 
-    console.log('CURENT USER DATA', currentUser);
-
     let data = {
-       "receiver":currentUser.id,
-       "min_api_version":1,
-       "sender":{
-          "name":"Viber Bot",
-          "avatar":"http://avatar.example.com"
-       },
-       "tracking_data":"tracking data",
-       "type":"text",
-       "text": "Thank you!"+req.body.name
+        name: currentUser.name,
+        phone: currentUser.phone,
+        address: currentUser.address
     }
 
-    
+   
 
-    fetch('https://chatapi.viber.com/pa/send_message', {
-        method: 'post',
-        body:    JSON.stringify(data),
-        headers: { 'Content-Type': 'application/json', 'X-Viber-Auth-Token': process.env.AUTH_TOKEN },
-    })
-    .then(res => res.json())
-    .then(json => console.log('JSON', json))   
+    db.collection('users').doc(currentUser.id).set(data)
+    .then(()=>{
+            let data = {
+                   "receiver":currentUser.id,
+                   "min_api_version":1,
+                   "sender":{
+                      "name":"Viber Bot",
+                      "avatar":"http://avatar.example.com"
+                   },
+                   "tracking_data":"tracking data",
+                   "type":"text",
+                   "text": "Thank you!"+req.body.name
+                }                
+
+                fetch('https://chatapi.viber.com/pa/send_message', {
+                    method: 'post',
+                    body:    JSON.stringify(data),
+                    headers: { 'Content-Type': 'application/json', 'X-Viber-Auth-Token': process.env.AUTH_TOKEN },
+                })
+                .then(res => res.json())
+                .then(json => console.log('JSON', json))
+
+    }).catch((error)=>{
+        console.log('ERROR:', error);
+    });
+
+       
 });
 
 
