@@ -123,22 +123,22 @@ bot.onSubscribe(response => {
     say(response, `Hi there ${response.userProfile.name}. I am ${bot.name}! Feel free to ask me if a web site is down for everyone or just you. Just send me a name of a website and I'll do the rest!`);
 });
 
-/*
-const message = new TextMessage("new text",KEYBOARD_JSON,null,null,null,3);
+
+const message = new TextMessage("Welcome to my tea shop",KEYBOARD_JSON,null,null,null,3);
 let KEYBOARD_JSON = {
         "Type": "keyboard",
         "DefaultHeight": true,
         "Buttons": [{
-            "ActionType": "reply",
-            "ActionBody": "reply to me",
-            "Text": "Key text",
+            "ActionType": "reply", // type of action
+            "ActionBody": "register", // the value of the keyboard
+            "Text": "Register", //this is text in keyboard
             "TextSize": "regular"
         }]
     };
 
 bot.onConversationStarted((userProfile, isSubscribed, context) =>
     bot.sendMessage(userProfile,message)
-);*/
+);
 
 
 
