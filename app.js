@@ -19,7 +19,7 @@ const PictureMessage = require('viber-bot').Message.Picture;
 const app = express(); 
 
 
-let user_id = '';
+let currentUser = {};
 
 
 
@@ -59,11 +59,11 @@ app.get('/newpage',function(req,res){
 
 app.post('/test',function(req,res){
 
-    console.log('USER ID', user_id);
+    console.log('USER ID', currentUser.id);
 
     
     let data = {
-       "receiver":user_id,
+       "receiver":currentUser.id,
        "min_api_version":1,
        "sender":{
           "name":"Viber Bot",
@@ -127,6 +127,8 @@ let KEYBOARD_JSON = {
         "Type": "keyboard",
         "DefaultHeight": true,
         "Buttons": [{
+            "Columns": 6,
+            "Rows": 1,
             "ActionType": "reply", // type of action
             "ActionBody": "register", // the value of the keyboard
             "Text": "Register", //this is text in keyboard
@@ -136,18 +138,18 @@ let KEYBOARD_JSON = {
 
 const message = new TextMessage("Welcome to my tea shop",KEYBOARD_JSON,null,null,null,3);
 
-
-bot.onConversationStarted((userProfile, isSubscribed, context) =>
+bot.onConversationStarted((userProfile, isSubscribed, context) =>     
     bot.sendMessage(userProfile,message)
 );
 
 
-
+/*
 bot.onTextMessage(/^hi|hello$/i, (message, response) =>
     response.send(new TextMessage(`Hi there ${response.userProfile.name}. I am robot`)));
 
 bot.onTextMessage(/^mingalarbar$/i, (message, response) =>
     response.send(new TextMessage(`Mingalarbar. Welcome to MCC`)));
+ */
 
 
 
@@ -157,6 +159,8 @@ bot.onTextMessage(/./, (message, response) => {
 
     console.log('MESSAGE:', message);
     console.log('USER', response.userProfile);
+
+
     
     switch(text){
         case "register":
@@ -203,9 +207,7 @@ const textReply = (message, response) => {
     response.send(bot_message);
 }
 
-const urlReply = (message, response) => {
-
-    user_id = response.userProfile.id;
+const urlReply = (message, response) => {    
 
     let bot_message = new UrlMessage(process.env.APP_URL + '/test/');   
     response.send(bot_message);
