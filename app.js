@@ -185,17 +185,17 @@ app.get('/admin/stocklist/:merchant_id', async (req,res) => {
     let data = [];
 
     snapshot.forEach(doc => {
-        let stock = {};
+        let batch = {};
 
-        stock.id = doc.id;
-        stock.batch = doc.data().batch;
-        stock.type = doc.data().type;
-        stock.qty = doc.data().qty;
-        stock.price = doc.data().price;
-        stock.received_date = doc.data().received_date;
-        stock.comment = doc.data().comment;      
+        batch.id = doc.id;
+        batch.batch = doc.data().batch;
+        batch.type = doc.data().type;
+        batch.qty = doc.data().qty;
+        batch.price = doc.data().price;
+        batch.received_date = doc.data().received_date;
+        batch.comment = doc.data().comment;      
         
-        data.push(stock);        
+        data.push(batch);        
     });   
 
 
@@ -205,7 +205,8 @@ app.get('/admin/stocklist/:merchant_id', async (req,res) => {
     let user = await userRef.get();
     if (!user.exists) {
       console.log('No such user!');        
-    } else {          
+    } else {    
+      merchant.merchant_id = user.data().id;      
       merchant.merchant_name = user.data().name;
     }
  
@@ -215,48 +216,27 @@ app.get('/admin/stocklist/:merchant_id', async (req,res) => {
 
 
 
-app.post('/admin/stocklist', async (req,res) => { 
-
-
-
-    res.json(req.body);
+app.post('/admin/stocklist', async (req,res) => {     
     
-    /*
-    const stocksRef = db.collection('users').doc(req.params.merchant_id).collection('stocks').where("qty", ">", 0);
-    const snapshot = await stocksRef.get();
-    if (snapshot.empty) {
-      console.log('No stocks.');
-      return;
-    }  
+    let today = new Date();
+    let merchat_id = req.body.merchant_id;
 
-    let data = [];
-
-    snapshot.forEach(doc => {
-        let stock = {};
-
-        stock.id = doc.id;
-        stock.batch = doc.data().batch;
-        stock.type = doc.data().type;
-        stock.qty = doc.data().qty;
-        stock.price = doc.data().price;
-        stock.received_date = doc.data().received_date;
-        stock.comment = doc.data().comment;      
-        
-        data.push(stock);        
-    });   
-
-
-    let merchant = { };        
-
-    let userRef = db.collection('users').doc(req.params.merchant_id);
-    let user = await userRef.get();
-    if (!user.exists) {
-      console.log('No such user!');        
-    } else {          
-      merchant.merchant_name = user.data().name;
+    let data = {
+        date: req.body.date,
+        batch_id: req.body.batch_id,
+        type: req.body.type,
+        qty: req.body.qty,
+        created_on:today   
     }
- 
-    res.render('stocklist.ejs', {data:data, merchant:merchant}); */   
+   
+
+    db.collection('users').doc(merchat_id).collection('sales').add(data)
+    .then(()=>{
+          res.json({success:'success'});  
+
+    }).catch((error)=>{
+        console.log('ERROR:', error);
+    }); 
     
 });
 

@@ -27,24 +27,25 @@
     <th>Action</th>
   </tr>
 
-  <% data.forEach(function(stock){ %>
+  <% data.forEach(function(batch){ %>
      <tr>
       
-       <td><%= stock.id %></td>
-       <td><%= stock.batch %></td>
-       <td><%= stock.type %></td>
-       <td><%= stock.qty %></td>
-       <td><%= stock.price %></td>
-       <td><%= stock.received_date %></td>
-       <td><%= stock.comment %></td>
+       <td><%= batch.id %></td>
+       <td><%= batch.batch %></td>
+       <td><%= batch.type %></td>
+       <td><%= batch.qty %></td>
+       <td><%= batch.price %></td>
+       <td><%= batch.received_date %></td>
+       <td><%= batch.comment %></td>
 
        <td>
         <form id="form" action="../../admin/stocklist" method="post">
-           sale: <input type="number" name="qty" min="1" max="<%= stock.qty %>"/>
+           sale: <input type="number" name="qty" min="1" max="<%= batch.qty %>"/>
            date: <input type="date" name="date"/>
-           <input type="hidden" name="id" value="<%= stock.id %>"/>
-           <input type="hidden" name="type" value="<%= stock.type %>"/>
-           <input type="hidden" name="batch" value="<%= stock.batch %>"/>
+           <input type="hidden" name="batch_id" value="<%= batch.id %>"/>
+           <input type="hidden" name="type" value="<%= batch.type %>"/>
+           <input type="hidden" name="batch" value="<%= batch.batch %>"/>
+           <input type="hidden" name="merchant_id" value="<%= merchant.merchant_id %>"/>
            <input type="submit" name="submit"/>
         </form>
        </td>
