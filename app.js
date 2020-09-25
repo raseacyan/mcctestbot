@@ -234,10 +234,10 @@ app.post('/admin/stocklist', async (req,res) => {
     db.collection('users').doc(merchant_id).collection('sales').add(data)
     .then(()=>{
           
-          db.collection('users').doc(merchant_id).collection('sales').doc(req.body.batch_id).update(data)
+          db.collection('users').doc(merchant_id).collection('stocks').doc(req.body.batch_id).update(data)
               .then(()=>{
                   res.redirect('/admin/stocklist/'+merchant_id);
-              }).catch((err)=>console.log('ERROR:', error));   
+              }).catch((err)=>console.log('ERROR:', err));   
 
     }).catch((error)=>{
         console.log('ERROR:', error);
