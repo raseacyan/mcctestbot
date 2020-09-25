@@ -229,12 +229,15 @@ app.post('/admin/stocklist', async (req,res) => {
         amount:parseInt(req.body.qty)*parseInt(req.body.price),
         created_on:today   
     }   
+
+    let instock = parseInt(req.body.instock) -  parseInt(req.body.qty);
    
     
     db.collection('users').doc(merchant_id).collection('sales').add(data)
     .then(()=>{
           
-          db.collection('users').doc(merchant_id).collection('stocks').doc(req.body.batch_id).update(data)
+          db.collection('users').doc(merchant_id).collection('stocks')
+          .doc(req.body.batch_id).update({qty:instock})
               .then(()=>{
                   res.redirect('/admin/stocklist/'+merchant_id);
               }).catch((err)=>console.log('ERROR:', err));   
