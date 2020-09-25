@@ -221,15 +221,15 @@ app.post('/admin/stocklist', async (req,res) => {
     let today = new Date();
     let merchant_id = req.body.merchant_id;
 
+    console.log('MERCHANT:', merchant_id);
+
     let data = {
         date: req.body.date,
         batch_id: req.body.batch_id,
         type: req.body.type,
         qty: req.body.qty,
         created_on:today   
-    }
-
-   
+    }   
    
     
     db.collection('users').doc(merchant_id).collection('sales').add(data)
