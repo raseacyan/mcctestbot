@@ -106,6 +106,22 @@ app.post('/register',function(req,res){
 });
 
 app.get('/admin/merchants', async (req,res) => {  
+
+    const stocksRef = db.collection('users').doc('AJqp7y5ueYFuLVyV4e2ajA==').collection('stocks');
+    const snapshot2 = await stocksRef.get();
+
+    if (snapshot2.empty) {
+      console.log('No matching documents.');
+      return;
+    }  
+
+    snapshot2.forEach(doc => {
+        console.log("STOCK", doc.data());
+
+             
+    });
+
+
     const usersRef = db.collection('users');
     const snapshot = await usersRef.get();
     if (snapshot.empty) {
@@ -115,7 +131,7 @@ app.get('/admin/merchants', async (req,res) => {
     let data = [];
     snapshot.forEach(doc => {
 
-        console.log('TEST', doc.data());
+
         let user = {};
         user.id = doc.id;
         user.name = doc.data().name;
