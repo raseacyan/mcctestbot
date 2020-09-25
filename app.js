@@ -228,15 +228,17 @@ app.post('/admin/stocklist', async (req,res) => {
         qty: req.body.qty,
         created_on:today   
     }
-   
 
+    res.json(data);
+   
+    /*
     db.collection('users').doc(merchant_id).collection('sales').add(data)
     .then(()=>{
           res.json({success:'success'});  
 
     }).catch((error)=>{
         console.log('ERROR:', error);
-    }); 
+    });*/ 
     
 });
 
