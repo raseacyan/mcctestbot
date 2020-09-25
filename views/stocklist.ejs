@@ -10,7 +10,7 @@
   <h1>Stocks</h1>
 
   <p>
-    Merchant ID: <%= merchant.merchant_id %><br>
+
     Merchant Name: <%= merchant.merchant_name %>
   <p>
   
@@ -38,7 +38,13 @@
        <td><%= stock.received_date %></td>
        <td><%= stock.comment %></td>
 
-       <td><a href="#">Sell</a> </td>
+       <td>
+        <form id="form" action="../../admin/stocklist" method="post">
+           sale: <input type="number" name="sale_qty"/>
+           date: <input type="date" name="sale_date"/>
+           <input type="submit" name="submit"/>
+        </form>
+       </td>
        
      
       

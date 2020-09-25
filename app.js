@@ -205,17 +205,58 @@ app.get('/admin/stocklist/:merchant_id', async (req,res) => {
     let user = await userRef.get();
     if (!user.exists) {
       console.log('No such user!');        
-    } else {      
-      merchant.merchant_id = user.data().viberid; 
+    } else {          
       merchant.merchant_name = user.data().name;
     }
  
-    res.render('stocklist.ejs', {data:data, merchant:merchant});      
-
-    
+    res.render('stocklist.ejs', {data:data, merchant:merchant});    
     
 });
 
+
+
+app.post('/admin/stocklist', async (req,res) => { 
+
+    res.json(res.body);
+    
+    /*
+    const stocksRef = db.collection('users').doc(req.params.merchant_id).collection('stocks').where("qty", ">", 0);
+    const snapshot = await stocksRef.get();
+    if (snapshot.empty) {
+      console.log('No stocks.');
+      return;
+    }  
+
+    let data = [];
+
+    snapshot.forEach(doc => {
+        let stock = {};
+
+        stock.id = doc.id;
+        stock.batch = doc.data().batch;
+        stock.type = doc.data().type;
+        stock.qty = doc.data().qty;
+        stock.price = doc.data().price;
+        stock.received_date = doc.data().received_date;
+        stock.comment = doc.data().comment;      
+        
+        data.push(stock);        
+    });   
+
+
+    let merchant = { };        
+
+    let userRef = db.collection('users').doc(req.params.merchant_id);
+    let user = await userRef.get();
+    if (!user.exists) {
+      console.log('No such user!');        
+    } else {          
+      merchant.merchant_name = user.data().name;
+    }
+ 
+    res.render('stocklist.ejs', {data:data, merchant:merchant}); */   
+    
+});
 
 
 
