@@ -219,15 +219,14 @@ app.get('/admin/stocklist/:merchant_id', async (req,res) => {
 app.post('/admin/stocklist', async (req,res) => {     
     
     let today = new Date();
-    let merchant_id = req.body.merchant_id;
-
- 
+    let merchant_id = req.body.merchant_id; 
 
     let data = {
         date: req.body.date,
         batch_id: req.body.batch_id,
         type: req.body.type,
-        qty: req.body.qty,
+        qty: parseInt(req.body.qty),
+        amount:parseInt(req.body.qty)*parseInt(req.body.price),
         created_on:today   
     }   
    
