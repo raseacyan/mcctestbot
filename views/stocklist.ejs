@@ -40,8 +40,11 @@
 
        <td>
         <form id="form" action="../../admin/stocklist" method="post">
-           sale: <input type="number" name="sale_qty"/>
-           date: <input type="date" name="sale_date"/>
+           sale: <input type="number" name="qty"/>
+           date: <input type="date" name="date"/>
+           <input type="hidden" name="id" value="<%= stock.id %>"/>
+           <input type="hidden" name="type" value="<%= stock.type %>"/>
+           <input type="hidden" name="batch" value="<%= stock.batch %>"/>
            <input type="submit" name="submit"/>
         </form>
        </td>

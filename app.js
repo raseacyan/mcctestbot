@@ -217,7 +217,9 @@ app.get('/admin/stocklist/:merchant_id', async (req,res) => {
 
 app.post('/admin/stocklist', async (req,res) => { 
 
-    res.json(res.body);
+
+
+    res.json(req.body);
     
     /*
     const stocksRef = db.collection('users').doc(req.params.merchant_id).collection('stocks').where("qty", ">", 0);
