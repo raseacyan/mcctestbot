@@ -249,6 +249,50 @@ app.post('/admin/stocklist', async (req,res) => {
 });
 
 
+app.get('/salesrecord/:merchant_id', async (req,res) => { 
+    
+
+    const salesRef = db.collection('users').doc(req.params.merchant_id).collection('sales');
+    const snapshot = await salesRef.get();
+    if (snapshot.empty) {
+      console.log('No sales.');
+      return;
+    }  
+
+    let data = [];
+
+    snapshot.forEach(doc => {
+        let sale = {};
+
+        sale.id = doc.id;
+        sale.date = doc.data().date;
+        sale.batch_id = doc.data().batch_id;
+        sale.type = doc.data().type;
+        sale.qty = doc.data().qty;
+        sale.amount = doc.data().amount;
+        
+        data.push(sale);        
+    });   
+
+
+    let merchant = { };        
+
+    let userRef = db.collection('users').doc(req.params.merchant_id);
+    let user = await userRef.get();
+    if (!user.exists) {
+      console.log('No such user!');        
+    } else {    
+      merchant.merchant_id = user.data().viberid;      
+      merchant.merchant_name = user.data().name;
+    }
+ 
+    res.render('salesrecord.ejs', {data:data, merchant:merchant});    
+    
+});
+
+
+
+
 
 app.get('/newpage',function(req,res){ 
      let data = {
