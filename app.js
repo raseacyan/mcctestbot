@@ -61,8 +61,6 @@ app.get('/register',function(req,res){
 
 app.post('/register',function(req,res){   
     
-    console.log('Data from Form:', req.body);
-
     currentUser.name = req.body.name;
     currentUser.phone = req.body.phone;
     currentUser.address = req.body.address;
@@ -101,7 +99,6 @@ app.post('/register',function(req,res){
     }).catch((error)=>{
         console.log('ERROR:', error);
     });
-
        
 });
 
@@ -144,8 +141,7 @@ app.get('/admin/merchants', async (req,res) => {
 });
 
 app.get('/admin/addstock/:merchant_id', async (req,res) => {  
-    let data = { };
-        
+    let data = { };        
 
     let userRef = db.collection('users').doc(req.params.merchant_id);
     let user = await userRef.get();
@@ -155,17 +151,36 @@ app.get('/admin/addstock/:merchant_id', async (req,res) => {
       data.merchant_id = user.data().viberid; 
       data.merchant_name = user.data().name;
     }
-
-    console.log('TEST', data);
-
     res.render('addstock.ejs', {data:data}); 
     
 });
 
 
 app.post('/admin/addstock/', async (req,res) => {  
-    console.log('POST ADD STOCK', req.body);
-    res.json(req.body); 
+   
+    let today = new Date();
+    let merchat_id = req.body.merchant_id;
+
+    let data = {
+        batch: req.body.item_batch,
+        type:req.body.item_type,
+        qty:req.body.item_qty,
+        price:req.body.item_price,
+        received_date:req.body.item_received_date,
+        comment:req.body.comment,
+        sold:0,
+        payment:0,
+        created_on:today      
+    }
+   
+
+    db.collection('users').doc(merchat_id).collection('stocks').add(data)
+    .then(()=>{
+          res.json({success:success});  
+
+    }).catch((error)=>{
+        console.log('ERROR:', error);
+    }); 
     
 });
 
