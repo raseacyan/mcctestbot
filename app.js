@@ -233,7 +233,11 @@ app.post('/admin/stocklist', async (req,res) => {
     
     db.collection('users').doc(merchant_id).collection('sales').add(data)
     .then(()=>{
-          res.json({success:'success'});  
+          
+          db.collection('users').doc(merchant_id).collection('sales').doc(req.body.batch_id).update(data)
+              .then(()=>{
+                  res.redirect('/admin/stocklist/'+merchant_id);
+              }).catch((err)=>console.log('ERROR:', error));   
 
     }).catch((error)=>{
         console.log('ERROR:', error);
