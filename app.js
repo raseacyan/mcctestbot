@@ -114,6 +114,8 @@ app.get('/admin/merchants', async (req,res) => {
     }  
     let data = [];
     snapshot.forEach(doc => {
+
+        console.log('TEST', doc.data());
         let user = {};
         user.id = doc.id;
         user.name = doc.data().name;
