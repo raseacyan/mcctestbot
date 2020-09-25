@@ -170,8 +170,7 @@ app.post('/admin/addstock/', async (req,res) => {
         qty:parseInt(req.body.item_qty),
         price:parseInt(req.body.item_price),
         received_date:req.body.item_received_date,
-        comment:req.body.comment,      
-        payment:0,
+        comment:req.body.comment,    
         created_on:today   
     }
    
