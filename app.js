@@ -197,8 +197,20 @@ app.get('/admin/stocklist/:merchant_id', async (req,res) => {
         
         data.push(stock);        
     });   
+
+
+    let merchant = { };        
+
+    let userRef = db.collection('users').doc(req.params.merchant_id);
+    let user = await userRef.get();
+    if (!user.exists) {
+      console.log('No such user!');        
+    } else {      
+      merchant.merchant_id = user.data().viberid; 
+      merchant.merchant_name = user.data().name;
+    }
  
-    res.render('stocklist.ejs', {data:data});      
+    res.render('stocklist.ejs', {data:data, merchant:merchant});      
 
     
     
