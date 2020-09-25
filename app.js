@@ -140,6 +140,8 @@ app.get('/admin/merchants', async (req,res) => {
     
 });
 
+
+
 app.get('/admin/addstock/:merchant_id', async (req,res) => {  
     let data = { };        
 
@@ -154,6 +156,7 @@ app.get('/admin/addstock/:merchant_id', async (req,res) => {
     res.render('addstock.ejs', {data:data}); 
     
 });
+
 
 
 app.post('/admin/addstock/', async (req,res) => {  
@@ -176,7 +179,7 @@ app.post('/admin/addstock/', async (req,res) => {
 
     db.collection('users').doc(merchat_id).collection('stocks').add(data)
     .then(()=>{
-          res.json({'success':success});  
+          res.json({success:'success'});  
 
     }).catch((error)=>{
         console.log('ERROR:', error);
