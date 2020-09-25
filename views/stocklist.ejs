@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>Stocks</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+ </head>
+
+  <body>
+  <h1>Stocks</h1>
+
+ 
+  
+  <table cellspacing="1" cellpadding="5" border="1">
+    <tr>
+    
+    <th>id</th>
+    <th>Batch</th>
+    <th>Type</th>   
+    <th>Qty</th>
+    <th>Price</th>
+    <th>Received Date</th>
+    <th>Comment</th>
+  </tr>
+
+  <% data.forEach(function(user){ %>
+     <tr>
+      
+       <td><%= stock.id %></td>
+       <td><%= stock.batch %></td>
+       <td><%= stock.type %></td>
+       <td><%= stock.qty %></td>
+       <td><%= stock.price %></td>
+       <td><%= stock.received_date %></td>
+       <td><%= stock.comment %></td>
+       
+     
+      
+     </tr>
+  <% }); %>
+
+
+  
+
+	</table>
+
+ 
+ 
+
+  </body>
+
+</html>

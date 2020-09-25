@@ -172,7 +172,7 @@ app.post('/admin/addstock/', async (req,res) => {
 });
 
 
-app.get('/admin/viewstocks/:merchant_id', async (req,res) => { 
+app.get('/admin/stocklist/:merchant_id', async (req,res) => { 
     
 
     const stocksRef = db.collection('users').doc(req.params.merchant_id).collection('stocks');
