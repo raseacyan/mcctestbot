@@ -40,7 +40,7 @@
 
        <td>
         <form id="form" action="../../admin/stocklist" method="post">
-           sale: <input type="number" name="qty"/>
+           sale: <input type="number" name="qty" min="1" max="<%= stock.qty %>"/>
            date: <input type="date" name="date"/>
            <input type="hidden" name="id" value="<%= stock.id %>"/>
            <input type="hidden" name="type" value="<%= stock.type %>"/>
