@@ -189,7 +189,7 @@ app.get('/admin/stocklist/:merchant_id', async (req,res) => {
 
         stock.id = doc.id;
         stock.batch = doc.data().batch;
-        stock.type = oc.data().type;
+        stock.type = doc.data().type;
         stock.qty = doc.data().qty;
         stock.price = doc.data().price;
         stock.received_date = doc.data().received_date;
