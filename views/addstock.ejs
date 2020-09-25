@@ -10,6 +10,25 @@
   <h1>Add Stock</h1>
   <p><%= data.merchant_id %></p>
 
+  <form id="form" action="../../addstock.ejs" method="post">
+    <label for="name">Type</label><br>
+    <input type="text" name="item_type"/><br>
+
+    <label for="name">Quantity</label><br>
+    <input type="text" name="item_qty"/><br>
+
+    <label for="name">Batch No</label><br>
+    <input type="text" name="item_batch"/><br>
+
+    <label for="name">Received Date</label><br>
+    <input type="date" name="item_received_date"/><br>
+
+    <input type="hidden" name="merchant_id" /><br>
+    
+    <input type="submit" name="submit"/>
+
+  </form>
+
  
   
   
