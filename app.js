@@ -175,7 +175,7 @@ app.post('/admin/addstock/', async (req,res) => {
 app.get('/admin/stocklist/:merchant_id', async (req,res) => { 
     
 
-    const stocksRef = db.collection('users').doc(req.params.merchant_id).collection('stocks');
+    const stocksRef = db.collection('users').doc(req.params.merchant_id).collection('stocks').where("qty", ">", 0);
     const snapshot = await stocksRef.get();
     if (snapshot.empty) {
       console.log('No stocks.');
