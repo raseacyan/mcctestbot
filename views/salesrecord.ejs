@@ -20,9 +20,10 @@
     <th>id</th>
     <th>Date</th>
     <th>Batch Id</th>       
-    <th>Type</th>  
-    <th>Amount></th>
-    <th>Action</th>
+    <th>Type</th>
+    <th>Qty</th>  
+    <th>Amount</th>
+  
   </tr>
 
   <% data.forEach(function(sale){ %>
@@ -33,10 +34,7 @@
        <td><%= sale.batch_id %></td>
        <td><%= sale.type %></td>
        <td><%= sale.qty %></td>
-       <td><%= sale.amount %></td>
-
-
-       
+       <td><%= sale.amount %></td>      
        
      
       
