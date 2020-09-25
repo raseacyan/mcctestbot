@@ -230,7 +230,7 @@ app.post('/admin/stocklist', async (req,res) => {
     }
    
 
-    db.collection('users').doc(merchat_id).collection('sales').add(data)
+    db.collection('users').doc(merchant_id).collection('sales').add(data)
     .then(()=>{
           res.json({success:'success'});  
 
