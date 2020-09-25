@@ -131,7 +131,7 @@ app.get('/admin/addstock/:merchant_id', async (req,res) => {
     let data = {
         merchant_id: req.param.merchant_id,
     }
-    res.render('merchants.ejs', {data:data}); 
+    res.render('addstock.ejs', {data:data}); 
     
 });
 
