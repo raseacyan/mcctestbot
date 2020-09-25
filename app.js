@@ -148,7 +148,7 @@ app.get('/admin/addstock/:merchant_id', async (req,res) => {
 app.post('/admin/addstock/', async (req,res) => {  
    
     let today = new Date();
-    let merchat_id = req.body.merchant_id;
+    let merchant_id = req.body.merchant_id;
 
     let data = {
         batch: req.body.item_batch,
@@ -161,7 +161,7 @@ app.post('/admin/addstock/', async (req,res) => {
     }
    
 
-    db.collection('users').doc(merchat_id).collection('stocks').add(data)
+    db.collection('users').doc(merchant_id).collection('stocks').add(data)
     .then(()=>{
           res.json({success:'success'});  
 
@@ -219,7 +219,7 @@ app.get('/admin/stocklist/:merchant_id', async (req,res) => {
 app.post('/admin/stocklist', async (req,res) => {     
     
     let today = new Date();
-    let merchat_id = req.body.merchant_id;
+    let merchant_id = req.body.merchant_id;
 
     let data = {
         date: req.body.date,
@@ -231,14 +231,14 @@ app.post('/admin/stocklist', async (req,res) => {
 
     res.json(data);
    
-    /*
+    
     db.collection('users').doc(merchant_id).collection('sales').add(data)
     .then(()=>{
           res.json({success:'success'});  
 
     }).catch((error)=>{
         console.log('ERROR:', error);
-    });*/ 
+    }); 
     
 });
 
