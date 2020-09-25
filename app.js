@@ -119,11 +119,18 @@ app.get('/admin/merchants', async (req,res) => {
         user.name = doc.data().name;
         user.phone = doc.data().phone;         
         user.address = doc.data().address;
-        data.push(user); 
-       
+        data.push(user);        
     });   
 
     console.log('ALL USERS', data);
+    res.render('merchants.ejs', {data:data}); 
+    
+});
+
+app.get('/admin/addstock/:merchant_id', async (req,res) => {  
+    let data = {
+        merchant_id: req.param.merchant_id,
+    }
     res.render('merchants.ejs', {data:data}); 
     
 });
