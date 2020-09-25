@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8">
-    <title>Appointments</title>
+    <title>Merchants</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
  </head>
 
@@ -17,7 +17,7 @@
     <th>Name</th>
     <th>Phone</th>
     <th>Address</th>   
-    <th>Action</th>
+    <th>Manage Stock</th>
   </tr>
 
   <% data.forEach(function(user){ %>
@@ -27,7 +27,7 @@
        <td><%= user.phone %></td>
        <td><%= user.address %></td>
      
-       <td>Add product</td>
+       <td><a href="../addstock/">Add Stock</a></td>
      </tr>
   <% }); %>
 
