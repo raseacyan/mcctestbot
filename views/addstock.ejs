@@ -10,7 +10,10 @@
   <h1>Add Stock</h1>
   
 
-  <form id="form" action="../../addstock.ejs" method="post">
+  <form id="form" action="../../addstock" method="post">
+    <label for="name">Merchant Name</label><br>
+    <input type="text" name="merchant_name" value="<%= data.merchant_name %>" disabled/><br>
+
     <label for="name">Type</label><br>
     <input type="text" name="item_type"/><br>
 

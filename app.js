@@ -131,7 +131,6 @@ app.get('/admin/merchants', async (req,res) => {
     let data = [];
     snapshot.forEach(doc => {
 
-
         let user = {};
         user.id = doc.id;
         user.name = doc.data().name;
@@ -139,17 +138,34 @@ app.get('/admin/merchants', async (req,res) => {
         user.address = doc.data().address;
         data.push(user);        
     });   
-
-    console.log('ALL USERS', data);
+ 
     res.render('merchants.ejs', {data:data}); 
     
 });
 
 app.get('/admin/addstock/:merchant_id', async (req,res) => {  
-    let data = {
-        merchant_id: req.params.merchant_id,
+    let data = { };
+        
+
+    let userRef = db.collection('users').doc(req.params.merchant_id);
+    let user = await userRef.get();
+    if (!user.exists) {
+      console.log('No such user!');        
+    } else {      
+      data.merchant_id = user.data().viberid; 
+      data.merchat_name = user.data().name;
     }
+
+    console.log('TEST', data);
+
     res.render('addstock.ejs', {data:data}); 
+    
+});
+
+
+app.post('/admin/addstock/', async (req,res) => {  
+    console.log('POST ADD STOCK', req.body);
+    res.json(req.body); 
     
 });
 
