@@ -8,7 +8,7 @@
 
   <body>
   <h1>Add Stock</h1>
-  <p><%= data.merchant_id %></p>
+  
 
   <form id="form" action="../../addstock.ejs" method="post">
     <label for="name">Type</label><br>
@@ -23,7 +23,7 @@
     <label for="name">Received Date</label><br>
     <input type="date" name="item_received_date"/><br>
 
-    <input type="hidden" name="merchant_id" /><br>
+    <input type="hidden" name="merchant_id" value="<%= data.merchant_id %>"/><br>
     
     <input type="submit" name="submit"/>
 
