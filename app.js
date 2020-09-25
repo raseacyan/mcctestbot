@@ -170,13 +170,13 @@ app.post('/admin/addstock/', async (req,res) => {
         comment:req.body.comment,
         sold:0,
         payment:0,
-        created_on:today      
+        created_on:today   
     }
    
 
     db.collection('users').doc(merchat_id).collection('stocks').add(data)
     .then(()=>{
-          res.json({success:success});  
+          res.json({'success':success});  
 
     }).catch((error)=>{
         console.log('ERROR:', error);
