@@ -206,7 +206,7 @@ app.get('/admin/stocklist/:merchant_id', async (req,res) => {
     if (!user.exists) {
       console.log('No such user!');        
     } else {    
-      merchant.merchant_id = user.data().id;      
+      merchant.merchant_id = user.data().viberid;      
       merchant.merchant_name = user.data().name;
     }
  
@@ -221,7 +221,7 @@ app.post('/admin/stocklist', async (req,res) => {
     let today = new Date();
     let merchant_id = req.body.merchant_id;
 
-    console.log('MERCHANT:', merchant_id);
+ 
 
     let data = {
         date: req.body.date,
