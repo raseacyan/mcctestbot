@@ -229,7 +229,7 @@ app.post('/admin/stocklist', async (req,res) => {
         created_on:today   
     }
 
-    res.json(data);
+   
    
     
     db.collection('users').doc(merchant_id).collection('sales').add(data)
