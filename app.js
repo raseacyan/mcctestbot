@@ -167,11 +167,10 @@ app.post('/admin/addstock/', async (req,res) => {
     let data = {
         batch: req.body.item_batch,
         type:req.body.item_type,
-        qty:req.body.item_qty,
-        price:req.body.item_price,
+        qty:parseInt(req.body.item_qty),
+        price:parseInt(req.body.item_price),
         received_date:req.body.item_received_date,
-        comment:req.body.comment,
-        sold:0,
+        comment:req.body.comment,      
         payment:0,
         created_on:today   
     }
