@@ -102,21 +102,7 @@ app.post('/register',function(req,res){
        
 });
 
-app.get('/admin/merchants', async (req,res) => {  
-
-    const stocksRef = db.collection('users').doc('AJqp7y5ueYFuLVyV4e2ajA==').collection('stocks');
-    const snapshot2 = await stocksRef.get();
-
-    if (snapshot2.empty) {
-      console.log('No matching documents.');
-      return;
-    }  
-
-    snapshot2.forEach(doc => {
-        console.log("STOCK", doc.data());
-
-             
-    });
+app.get('/admin/merchants', async (req,res) => {    
 
 
     const usersRef = db.collection('users');
@@ -182,6 +168,39 @@ app.post('/admin/addstock/', async (req,res) => {
     }).catch((error)=>{
         console.log('ERROR:', error);
     }); 
+    
+});
+
+
+app.get('/admin/viewstocks/:merchant_id', async (req,res) => { 
+    
+
+    const stocksRef = db.collection('users').doc(req.params.merchant_id).collection('stocks');
+    const snapshot = await stocksRef.get();
+    if (snapshot.empty) {
+      console.log('No stocks.');
+      return;
+    }  
+
+    let data = [];
+
+    snapshot.forEach(doc => {
+        let stock = {};
+
+        stock.id = doc.id;
+        stock.batch = doc.data().batch;
+        stock.type = oc.data().type;
+        stock.qty = doc.data().qty;
+        stock.price = doc.data().price;
+        stock.received_date = doc.data().received_date;
+        stock.comment = doc.data().comment;      
+        
+        data.push(stock);        
+    });   
+ 
+    res.render('stocklist.ejs', {data:data});      
+
+    
     
 });
 
