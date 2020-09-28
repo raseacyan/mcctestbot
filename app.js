@@ -102,9 +102,7 @@ app.post('/register',function(req,res){
        
 });
 
-app.get('/admin/merchants', async (req,res) => {    
-
-
+app.get('/admin/merchants', async (req,res) => {
     const usersRef = db.collection('users');
     const snapshot = await usersRef.get();
     if (snapshot.empty) {
@@ -249,7 +247,7 @@ app.post('/admin/stocklist', async (req,res) => {
 });
 
 
-app.get('/salesrecord/:merchant_id', async (req,res) => { 
+app.get('/admin/salesrecord/:merchant_id', async (req,res) => { 
     
 
     const salesRef = db.collection('users').doc(req.params.merchant_id).collection('sales');
