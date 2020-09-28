@@ -292,10 +292,12 @@ app.get('/admin/salesrecord/:merchant_id', async (req,res) => {
 app.get('/admin/payment/:merchant_id', async (req,res) => {  
 
     let total_sale = 0;
+    let total_paid = 0;
 
     const salesRef = db.collection('users').doc(req.params.merchant_id).collection('sales');
     const snapshot = await salesRef.get();
     if (snapshot.empty) {
+      total_sale = 0;
       console.log('No sales.');
       return;
     }    
@@ -303,6 +305,18 @@ app.get('/admin/payment/:merchant_id', async (req,res) => {
     snapshot.forEach(doc => {        
         total_sale += doc.data().amount;              
     });   
+
+    const paymentsRef = db.collection('users').doc(req.params.merchant_id).collection('payments');
+    const snapshot = await paymentsRef.get();
+    if (snapshot.empty) {
+      total_paid = 0;
+      console.log('No payments.');
+      return;
+    }    
+
+    snapshot.forEach(doc => {        
+        total_paid += doc.data().amount;              
+    }); 
 
     let merchant = { };        
 
@@ -316,6 +330,7 @@ app.get('/admin/payment/:merchant_id', async (req,res) => {
     }
 
     merchant.total_sale = total_sale;
+    merchant.total_paid = total_paid;
  
  
 
@@ -339,7 +354,7 @@ app.post('/admin/savepayment', async (req,res) => {
    
     
     db.collection('users').doc(merchant_id).collection('payments').add(data)
-    .then(()=>{          
+    .then(()=>{  
         res.redirect('/admin/payment/'+merchant_id);   
 
     }).catch((error)=>{
