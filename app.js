@@ -289,6 +289,14 @@ app.get('/admin/salesrecord/:merchant_id', async (req,res) => {
 });
 
 
+app.get('/admin/payment/:merchant_id', async (req,res) => {    
+
+      res.render('paymentrecord.ejs'); 
+    
+});
+
+
+
 
 
 
