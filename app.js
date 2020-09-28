@@ -291,6 +291,19 @@ app.get('/admin/salesrecord/:merchant_id', async (req,res) => {
 
 app.get('/admin/payment/:merchant_id', async (req,res) => {  
 
+    let total_sale = 0;
+
+    const salesRef = db.collection('users').doc(req.params.merchant_id).collection('sales');
+    const snapshot = await salesRef.get();
+    if (snapshot.empty) {
+      console.log('No sales.');
+      return;
+    }    
+
+    snapshot.forEach(doc => {        
+        total_sale += doc.data().amount;              
+    });   
+
     let merchant = { };        
 
     let userRef = db.collection('users').doc(req.params.merchant_id);
@@ -301,6 +314,8 @@ app.get('/admin/payment/:merchant_id', async (req,res) => {
       merchant.merchant_id = user.data().viberid;      
       merchant.merchant_name = user.data().name;
     }
+
+    merchant.total_sale = total_sale;
  
  
 
