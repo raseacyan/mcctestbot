@@ -324,6 +324,32 @@ app.get('/admin/payment/:merchant_id', async (req,res) => {
 });
 
 
+app.post('/admin/savepayment', async (req,res) => {     
+    
+    let today = new Date();
+    let merchant_id = req.body.merchant_id; 
+
+    let data = {
+        amount: parseInt(req.body.amount),
+        date: req.body.date,
+        
+        balance:parseInt(req.body.total_sale) - parseInt(req.body.amount),
+        created_on:today   
+    }       
+   
+    
+    db.collection('users').doc(merchant_id).collection('payments').add(data)
+    .then(()=>{          
+        res.redirect('/admin/payment/'+merchant_id);   
+
+    }).catch((error)=>{
+        console.log('ERROR:', error);
+    }); 
+    
+});
+
+
+
 
 
 
