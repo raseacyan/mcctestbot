@@ -250,7 +250,7 @@ app.post('/admin/stocklist', async (req,res) => {
 app.get('/admin/salesrecord/:merchant_id', async (req,res) => { 
     
 
-    const salesRef = db.collection('users').doc(req.params.merchant_id).collection('sales');
+    const salesRef = db.collection('users').doc(req.params.merchant_id).collection('sales').orderBy('date');
     const snapshot = await salesRef.get();
     if (snapshot.empty) {
       console.log('No sales.');
