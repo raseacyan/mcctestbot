@@ -177,7 +177,7 @@ app.get('/admin/stocklist/:merchant_id', async (req,res) => {
     const snapshot = await stocksRef.get();
     if (snapshot.empty) {
       console.log('No stocks.');
-      return;
+      res.send('No stocks');
     }  
 
     let data = [];
@@ -253,8 +253,7 @@ app.get('/admin/salesrecord/:merchant_id', async (req,res) => {
     const salesRef = db.collection('users').doc(req.params.merchant_id).collection('sales').orderBy('date', 'desc');
     const snapshot = await salesRef.get();
     if (snapshot.empty) {
-      console.log('No sales.');
-      return;
+      res.send('No sales record');
     }  
 
     let data = [];
