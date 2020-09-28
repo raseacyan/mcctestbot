@@ -12,6 +12,15 @@
   <p>Merchant Name: <%= merchant.merchant_name %> <p>
   <p>Total Sale: <%= merchant.total_sale %> <p>
 
+
+  <form id="form" action="../../admin/savepayment" method="post">
+     amount: <input type="number" name="amount"/> <br>
+     date: <input type="date" name="date"/> <br>
+     
+     <input type="hidden" name="merchant_id" value="<%= merchant.merchant_id %>"/>
+     <input type="submit" name="submit"/>
+  </form>
+
   
 
  
