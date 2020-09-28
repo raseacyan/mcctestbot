@@ -307,14 +307,14 @@ app.get('/admin/payment/:merchant_id', async (req,res) => {
     });   
 
     const paymentsRef = db.collection('users').doc(req.params.merchant_id).collection('payments');
-    const snapshot = await paymentsRef.get();
-    if (snapshot.empty) {
+    const snapshot2 = await paymentsRef.get();
+    if (snapshot2.empty) {
       total_paid = 0;
       console.log('No payments.');
       return;
     }    
 
-    snapshot.forEach(doc => {        
+    snapshot2.forEach(doc => {        
         total_paid += doc.data().amount;              
     }); 
 
