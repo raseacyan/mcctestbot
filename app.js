@@ -299,24 +299,27 @@ app.get('/admin/payment/:merchant_id', async (req,res) => {
     if (snapshot.empty) {
       total_sale = 0;
       console.log('No sales.');
-      return;
-    }    
-
-    snapshot.forEach(doc => {        
+      
+    } else{
+        snapshot.forEach(doc => {        
         total_sale += doc.data().amount;              
-    });   
+    });
+    } 
+
+       
 
     const paymentsRef = db.collection('users').doc(req.params.merchant_id).collection('payments');
     const snapshot2 = await paymentsRef.get();
     if (snapshot2.empty) {
       total_paid = 0;
-      console.log('No payments.');
-      return;
-    }    
+      console.log('No payments.');      
+    } else{
+        snapshot2.forEach(doc => {        
+            total_paid += doc.data().amount;              
+        }); 
+    }
 
-    snapshot2.forEach(doc => {        
-        total_paid += doc.data().amount;              
-    }); 
+    
 
     let merchant = { };        
 
@@ -331,6 +334,7 @@ app.get('/admin/payment/:merchant_id', async (req,res) => {
 
     merchant.total_sale = total_sale;
     merchant.total_paid = total_paid;
+    merchant.total_balance = total_sale - total_paid;
  
  
 
@@ -346,9 +350,8 @@ app.post('/admin/savepayment', async (req,res) => {
 
     let data = {
         amount: parseInt(req.body.amount),
-        date: req.body.date,
-        
-        balance:parseInt(req.body.total_sale) - parseInt(req.body.amount),
+        date: req.body.date,        
+       
         created_on:today   
     }       
    
