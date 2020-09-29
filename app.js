@@ -301,13 +301,11 @@ app.get('/admin/payment/:merchant_id', async (req,res) => {
       console.log('No sales.');      
     } else{       
 
-        snapshot.forEach(doc => {       
-        let payment = {};
-        payment.date = doc.data().date; 
-        payment.amount = doc.data().amount; 
+        snapshot.forEach(doc => {      
+         
         total_sale += doc.data().amount;  
 
-        payment_logs.push(payment);            
+                  
     });
     } 
 
@@ -320,7 +318,12 @@ app.get('/admin/payment/:merchant_id', async (req,res) => {
       console.log('No payments.');      
     } else{
         snapshot2.forEach(doc => {        
-            total_paid += doc.data().amount;              
+            total_paid += doc.data().amount;  
+
+            let payment = {};
+            payment.date = doc.data().date; 
+            payment.amount = doc.data().amount; 
+            payment_logs.push(payment);             
         }); 
     }
 
