@@ -733,7 +733,7 @@ const checkBalance = async (message, response) => {
     
     
 
-    const salesRef = db.collection('users').doc(req.params.merchant_id).collection('sales');
+    const salesRef = db.collection('users').doc(currentUser.id).collection('sales');
     const snapshot = await salesRef.get();
     if (snapshot.empty) {
         total_sale = 0;
@@ -749,7 +749,7 @@ const checkBalance = async (message, response) => {
 
        
 
-    const paymentsRef = db.collection('users').doc(req.params.merchant_id).collection('payments').orderBy('date', 'desc').limit(5);
+    const paymentsRef = db.collection('users').doc(currentUser.id).collection('payments').orderBy('date', 'desc').limit(5);
     const snapshot2 = await paymentsRef.get();
     if (snapshot2.empty) {
       total_paid = 0;           
@@ -774,7 +774,7 @@ const checkBalance = async (message, response) => {
     let bot_message1 = new TextMessage(`Your total sale is ${total_sale} and total paid is ${total_paid}. Your balance is ${total_balance}`);    
     let bot_message2 = new TextMessage(`${payment_history_message}`);
 
- 
+
 
       
     response.send(bot_message1).then(()=>{
