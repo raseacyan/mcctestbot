@@ -745,6 +745,8 @@ const checkBalance = async (message, response) => {
     });
     } 
 
+    console.log('TOTAL SALE:', total_sale);
+
        
 
     const paymentsRef = db.collection('users').doc(req.params.merchant_id).collection('payments').orderBy('date', 'desc').limit(5);
@@ -763,12 +765,16 @@ const checkBalance = async (message, response) => {
         }); 
     }
 
-    
+    console.log('TOTAL PAID:', total_paid);
 
     let total_balance = total_sale - total_paid;
 
+    console.log('TOTAL BALANCE:', total_balance);
+
     let bot_message1 = new TextMessage(`Your total sale is ${total_sale} and total paid is ${total_paid}. Your balance is ${total_balance}`);    
     let bot_message2 = new TextMessage(`${payment_history_message}`);
+
+ 
 
       
     response.send(bot_message1).then(()=>{
