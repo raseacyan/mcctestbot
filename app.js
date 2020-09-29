@@ -298,14 +298,10 @@ app.get('/admin/payment/:merchant_id', async (req,res) => {
     const snapshot = await salesRef.get();
     if (snapshot.empty) {
       total_sale = 0;
-      console.log('No sales.');      
-    } else{       
-
-        snapshot.forEach(doc => {      
-         
-        total_sale += doc.data().amount;  
-
-                  
+      res.send('No sales.');      
+    } else{    
+        snapshot.forEach(doc => {   
+        total_sale += doc.data().amount;                   
     });
     } 
 
@@ -505,6 +501,9 @@ bot.onTextMessage(/./, (message, response) => {
         case "my-stock":
             checkStock(message, response);
             break;
+        case "my-balance":
+            checkBalance(message, response);
+            break
         case "text":
             textReply(message, response);
             break; 
@@ -712,20 +711,69 @@ const checkStock = async (message, response) => {
         qty = doc.data().qty;        
         received_date = doc.data().received_date;    
 
-        stock_message += `Your batch ${batch} of type ${type} has ${qty} in stock\n`; 
-
-        console.log('TEST:', stock_message);       
+        stock_message += `Your batch ${batch} of type ${type} has ${qty} in stock\n`;   
         
                
     }); 
 
     let bot_message = new TextMessage(`${stock_message}`);    
-        response.send(bot_message);  
+        response.send(bot_message); 
+    
+}
 
 
 
+const checkBalance = async (message, response) => {
 
+    
+    
+    let total_sale = 0;
+    let total_paid = 0;
+    let payment_history_message = "";
+    
+    
 
+    const salesRef = db.collection('users').doc(req.params.merchant_id).collection('sales');
+    const snapshot = await salesRef.get();
+    if (snapshot.empty) {
+        total_sale = 0;
+        let bot_message = new TextMessage(`You have no sales`);    
+        response.send(bot_message);       
+    } else{    
+        snapshot.forEach(doc => {   
+        total_sale += doc.data().amount;                   
+    });
+    } 
+
+       
+
+    const paymentsRef = db.collection('users').doc(req.params.merchant_id).collection('payments').orderBy('date', 'desc').limit(5);
+    const snapshot2 = await paymentsRef.get();
+    if (snapshot2.empty) {
+      total_paid = 0;           
+    } else{
+        snapshot2.forEach(doc => {        
+            total_paid += doc.data().amount; 
+          
+            date = doc.data().date; 
+            amount = doc.data().amount; 
+
+            payment_history_message += `Amount: ${amount} is paid on ${date}\n`;
+                       
+        }); 
+    }
+
+    
+
+    let total_balance = total_sale - total_paid;
+
+    let bot_message1 = new TextMessage(`Your total sale is ${total_sale} and total paid is ${total_paid}. Your balance is ${total_balance}`);    
+    let bot_message2 = new TextMessage(`${payment_history_message}`);
+
+      
+    response.send(bot_message1).then(()=>{
+        return response.send(bot_message2);
+    });  
     
 }
 
