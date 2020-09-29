@@ -502,6 +502,9 @@ bot.onTextMessage(/./, (message, response) => {
         case "register":
             registerUser(message, response);
             break;
+        case "my-stock":
+            checkStock(message, response);
+            break;
         case "text":
             textReply(message, response);
             break; 
@@ -674,81 +677,52 @@ const registerUser = async (message, response) => {
                 "BgMedia": "http://www.url.by/test.gif",
                 "BgLoop": true,
                 "ActionType": "reply",
-                "ActionBody": "my-stock",               
-                "Text": "My Stock",
+                "ActionBody": "my-balance",               
+                "Text": "My Balance",
                 "TextVAlign": "middle",
                 "TextHAlign": "center",
                 "TextOpacity": 60,
                 "TextSize": "regular"
-            },
-            {
-                "Columns": 6,
-                "Rows": 1,
-                "BgColor": "#2db9b9",
-                "BgMediaType": "gif",
-                "BgMedia": "http://www.url.by/test.gif",
-                "BgLoop": true,
-                "ActionType": "reply",
-                "ActionBody": "my-stock",               
-                "Text": "My Stock",
-                "TextVAlign": "middle",
-                "TextHAlign": "center",
-                "TextOpacity": 60,
-                "TextSize": "regular"
-            },
-            {
-                "Columns": 6,
-                "Rows": 1,
-                "BgColor": "#2db9b9",
-                "BgMediaType": "gif",
-                "BgMedia": "http://www.url.by/test.gif",
-                "BgLoop": true,
-                "ActionType": "reply",
-                "ActionBody": "my-stock",               
-                "Text": "My Stock",
-                "TextVAlign": "middle",
-                "TextHAlign": "center",
-                "TextOpacity": 60,
-                "TextSize": "regular"
-            },
-            {
-                "Columns": 6,
-                "Rows": 1,
-                "BgColor": "#2db9b9",
-                "BgMediaType": "gif",
-                "BgMedia": "http://www.url.by/test.gif",
-                "BgLoop": true,
-                "ActionType": "reply",
-                "ActionBody": "my-stock",               
-                "Text": "My Stock",
-                "TextVAlign": "middle",
-                "TextHAlign": "center",
-                "TextOpacity": 60,
-                "TextSize": "regular"
-            },
-            {
-                "Columns": 6,
-                "Rows": 1,
-                "BgColor": "#2db9b9",
-                "BgMediaType": "gif",
-                "BgMedia": "http://www.url.by/test.gif",
-                "BgLoop": true,
-                "ActionType": "reply",
-                "ActionBody": "my-stock",               
-                "Text": "My Stock",
-                "TextVAlign": "middle",
-                "TextHAlign": "center",
-                "TextOpacity": 60,
-                "TextSize": "regular"
-            },
+            },            
         ]
     };
 
       let bot_message3 = new TextMessage(`You are already registered`, actionKeyboard);    
       response.send(bot_message3);
-    }
+    }    
+}
 
-    
+const checkStock = (message, response) => {
+
+
+    const stocksRef = db.collection('users').doc(currentUser.id).collection('stocks').where("qty", ">", 0);
+    const snapshot = await stocksRef.get();
+    if (snapshot.empty) {
+        let bot_message = new TextMessage(`You have no stock`);    
+        response.send(bot_message);
+    }  
+
+ 
+    let stock_message = '';
+    snapshot.forEach(doc => {
+  
+        
+        batch = doc.data().batch;
+        type = doc.data().type;
+        qty = doc.data().qty;        
+        received_date = doc.data().received_date;    
+
+        stock_message += `Your batch ${batch} of type ${type} has ${qty} in stock\n`;        
+        
+               
+    }); 
+
+    let bot_message = new TextMessage(`You have sent message: ${message.text}`);    
+        response.send(bot_message);  
+
+
+
+
 
     
 }
