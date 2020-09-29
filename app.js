@@ -712,12 +712,14 @@ const checkStock = (message, response) => {
         qty = doc.data().qty;        
         received_date = doc.data().received_date;    
 
-        stock_message += `Your batch ${batch} of type ${type} has ${qty} in stock\n`;        
+        stock_message += `Your batch ${batch} of type ${type} has ${qty} in stock\n`; 
+
+        console.log('TEST:', stock_message);       
         
                
     }); 
 
-    let bot_message = new TextMessage(`You have sent message: ${message.text}`);    
+    let bot_message = new TextMessage(`${stock_messag}`);    
         response.send(bot_message);  
 
 
