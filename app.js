@@ -719,7 +719,7 @@ const checkStock = async (message, response) => {
                
     }); 
 
-    let bot_message = new TextMessage(`${stock_messag}`);    
+    let bot_message = new TextMessage(`${stock_message}`);    
         response.send(bot_message);  
 
 
