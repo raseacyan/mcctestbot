@@ -639,7 +639,7 @@ const registerUser = async (message, response) => {
     const userRef = db.collection('users').doc(currentUser.id);
     const user = await userRef.get();
     if (!user.exists) {
-      console.log('No such document!');
+        console.log('No such document!');
         let bot_message1 = new TextMessage(`Click on following link to register`); 
         let bot_message2 = new UrlMessage(APP_URL + '/register/');   
         response.send(bot_message1).then(()=>{
@@ -647,7 +647,29 @@ const registerUser = async (message, response) => {
         });
     } else {
       console.log('Document data:', user.data());
-      let bot_message3 = new TextMessage(`You are already registered`);    
+      let actionKeyboard = {
+        "Type": "keyboard",
+        "Revision": 1,
+        "Buttons": [
+            {
+                "Columns": 6,
+                "Rows": 1,
+                "BgColor": "#2db9b9",
+                "BgMediaType": "gif",
+                "BgMedia": "http://www.url.by/test.gif",
+                "BgLoop": true,
+                "ActionType": "reply",
+                "ActionBody": "my-stock",               
+                "Text": "My Stock",
+                "TextVAlign": "middle",
+                "TextHAlign": "center",
+                "TextOpacity": 60,
+                "TextSize": "regular"
+            }
+        ]
+    };
+
+      let bot_message3 = new TextMessage(`You are already registered`, actionKeyboard);    
       response.send(bot_message3);
     }
 
