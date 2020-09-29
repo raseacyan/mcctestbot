@@ -692,7 +692,7 @@ const registerUser = async (message, response) => {
     }    
 }
 
-const checkStock = (message, response) => {
+const checkStock = async (message, response) => {
 
 
     const stocksRef = db.collection('users').doc(currentUser.id).collection('stocks').where("qty", ">", 0);
