@@ -24,6 +24,44 @@ const app = express();
 let currentUser = {};
 
 
+let actionKeyboard = {
+        "Type": "keyboard",
+        "Revision": 1,
+        "Buttons": [
+            {
+                "Columns": 6,
+                "Rows": 1,
+                "BgColor": "#2db9b9",
+                "BgMediaType": "gif",
+                "BgMedia": "http://www.url.by/test.gif",
+                "BgLoop": true,
+                "ActionType": "reply",
+                "ActionBody": "my-stock",               
+                "Text": "My Stock",
+                "TextVAlign": "middle",
+                "TextHAlign": "center",
+                "TextOpacity": 60,
+                "TextSize": "regular"
+            },
+            {
+                "Columns": 6,
+                "Rows": 1,
+                "BgColor": "#2db9b9",
+                "BgMediaType": "gif",
+                "BgMedia": "http://www.url.by/test.gif",
+                "BgLoop": true,
+                "ActionType": "reply",
+                "ActionBody": "my-balance",               
+                "Text": "My Balance",
+                "TextVAlign": "middle",
+                "TextHAlign": "center",
+                "TextOpacity": 60,
+                "TextSize": "regular"
+            },            
+        ]
+    };
+
+
 
 // Creating the bot with access token, name and avatar
 const bot = new ViberBot({
@@ -503,7 +541,10 @@ bot.onTextMessage(/./, (message, response) => {
             break;
         case "my-balance":
             checkBalance(message, response);
-            break
+            break;
+        case "menu":
+            showMenu(message, response);
+            break;
         case "text":
             textReply(message, response);
             break; 
@@ -781,6 +822,13 @@ const checkBalance = async (message, response) => {
         return response.send(bot_message2);
     });  
     
+}
+
+
+const showMenu = (message, response) => {
+
+    let bot_message = new TextMessage(`Please select your activity in keyboard menu`, actionKeyboard);    
+    response.send(bot_message);
 }
 
 
