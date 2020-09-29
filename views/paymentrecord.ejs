@@ -24,6 +24,20 @@
      <input type="submit" name="submit"/>
   </form>
 
+  <h3>History</h3>
+  <table cellspacing="1" cellpadding="5" border="1">
+    <tr>    
+      <th>Date</th>
+      <th>Amount</th>    
+    </tr>
+
+    <% merchant.payment_logs.forEach(function(payment){ %>
+       <tr>        
+         <td><%= payment.date %></td>
+         <td><%= payment.amount %></td>         
+       </tr>
+    <% }); %>
+
   
 
  
