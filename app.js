@@ -294,7 +294,7 @@ app.get('/admin/payment/:merchant_id', async (req,res) => {
     let total_paid = 0;
     let payment_logs = [];
 
-    const salesRef = db.collection('users').doc(req.params.merchant_id).collection('sales').orderBy('date', 'desc');
+    const salesRef = db.collection('users').doc(req.params.merchant_id).collection('sales');
     const snapshot = await salesRef.get();
     if (snapshot.empty) {
       total_sale = 0;
@@ -311,7 +311,7 @@ app.get('/admin/payment/:merchant_id', async (req,res) => {
 
        
 
-    const paymentsRef = db.collection('users').doc(req.params.merchant_id).collection('payments');
+    const paymentsRef = db.collection('users').doc(req.params.merchant_id).collection('payments').orderBy('date', 'desc');
     const snapshot2 = await paymentsRef.get();
     if (snapshot2.empty) {
       total_paid = 0;
