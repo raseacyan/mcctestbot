@@ -679,6 +679,8 @@ const keyboardReply = (message, response) => {
 
 const registerUser = async (message, response) => {
 
+    console.log('CUID:', currentUser.id);
+
     const userRef = db.collection('users').doc(currentUser.id);
     const user = await userRef.get();
     if (!user.exists) {
