@@ -36,7 +36,7 @@ let actionKeyboard = {
                 "BgMedia": "http://www.url.by/test.gif",
                 "BgLoop": true,
                 "ActionType": "reply",
-                "ActionBody": "my-stock",               
+                "ActionBody": "http://www.google.com",               
                 "Text": "My Stock",
                 "TextVAlign": "middle",
                 "TextHAlign": "center",
@@ -86,6 +86,10 @@ app.get('/',function(req,res){
 
 app.get('/test',function(req,res){    
      res.render('test.ejs');
+});
+
+app.get('/zayyarkyaw',function(req,res){    
+     res.send('my name is zay yar kyaw');
 });
 
 
@@ -680,12 +684,25 @@ const keyboardReply = (message, response) => {
 const registerUser = async (message, response) => {
 
     console.log('CUID:', currentUser.id);
+    let user;
 
     const userRef = db.collection('users');
-    const user = await userRef.where('viberid', '==', currentUser.id).limit(1).get();
+    //const user = await userRef.where('viberid', '==', currentUser.id).limit(1).get();
+    
+    const snapshot = await userRef.where('viberid', '==', currentUser.id).get();
+
+    if (snapshot.empty) {
+      console.log('No matching documents.');
+      return;
+    }  
+
+    snapshot.forEach(doc => {
+      user = doc;
+    });
+    
     if (!user.exists) {
         console.log('No such document!');
-        let bot_message1 = new TextMessage(`Click on following link to register`); 
+        let bot_message1 = new TextMessage(`Click on following link to register`, ); 
         let bot_message2 = new UrlMessage(APP_URL + '/register/');   
         response.send(bot_message1).then(()=>{
             return response.send(bot_message2);
