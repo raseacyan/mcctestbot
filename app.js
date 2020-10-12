@@ -84,12 +84,8 @@ app.get('/',function(req,res){
     res.send('your app is up and running');
 });
 
-app.get('/test',function(req,res){    
-     res.render('test.ejs');
-});
-
-app.get('/zayarkyaw',function(req,res){    
-     res.send('my name is zay yar kyaw');
+app.get('/addstock',function(req,res){    
+     res.render('addstock2.ejs');
 });
 
 
