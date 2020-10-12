@@ -88,6 +88,13 @@ app.get('/addstock',function(req,res){
      res.render('addstock2.ejs');
 });
 
+app.post('/addstock',function(req,res){    
+     let name = req.body.name; 
+     let email = req.body.email
+    // res.send('your name is: ' + name + " and your email is " + email);
+    res.json({name:name, email:email});
+});
+
 
 app.get('/register',function(req,res){   
       let data = {
