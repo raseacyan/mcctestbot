@@ -112,7 +112,7 @@ app.post('/register',function(req,res){
 
    
 
-    db.collection('users').doc(currentUser.id).set(data)
+    db.collection('users').add(data)
     .then(()=>{
             let data = {
                    "receiver":currentUser.id,
