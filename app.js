@@ -88,7 +88,7 @@ app.get('/test',function(req,res){
      res.render('test.ejs');
 });
 
-app.get('/zayyarkyaw',function(req,res){    
+app.get('/zayarkyaw',function(req,res){    
      res.send('my name is zay yar kyaw');
 });
 
