@@ -681,8 +681,8 @@ const registerUser = async (message, response) => {
 
     console.log('CUID:', currentUser.id);
 
-    const userRef = db.collection('users').doc(currentUser.id);
-    const user = await userRef.get();
+    const userRef = db.collection('users');
+    const user = await userRef.where('viberid', '==', currentUser.id).limit(1).get();
     if (!user.exists) {
         console.log('No such document!');
         let bot_message1 = new TextMessage(`Click on following link to register`); 
