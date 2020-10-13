@@ -786,17 +786,36 @@ const checkBalance = async (message, response) => {
     let total_sale = 0;
     let total_paid = 0;
     let payment_history_message = "";
+
+
+    let user_id = '';
+
+    const userRef = db.collection('users');    
+    const snapshot = await userRef.where('viberid', '==', currentUser.id).limit(1).get();
+
+    if (snapshot.empty) {
+        console.log('No such document!');
+        let bot_message1 = new TextMessage(`Click on following link to register`, ); 
+        let bot_message2 = new UrlMessage(APP_URL + '/register/');   
+        response.send(bot_message1).then(()=>{
+            return response.send(bot_message2);
+        });
+    }else{
+        snapshot.forEach(doc => {
+            user_id = doc.id;         
+        });
+     }
     
     
 
-    const salesRef = db.collection('users').doc(currentUser.id).collection('sales');
-    const snapshot = await salesRef.get();
-    if (snapshot.empty) {
+    const salesRef = db.collection('users').doc(user_id).collection('sales');
+    const snapshot2 = await salesRef.get();
+    if (snapshot2.empty) {
         total_sale = 0;
         let bot_message = new TextMessage(`You have no sales`);    
         response.send(bot_message);       
     } else{    
-        snapshot.forEach(doc => {   
+        snapshot2.forEach(doc => {   
         total_sale += doc.data().amount;                   
     });
     } 
@@ -806,11 +825,11 @@ const checkBalance = async (message, response) => {
        
 
     const paymentsRef = db.collection('users').doc(currentUser.id).collection('payments').orderBy('date', 'desc').limit(5);
-    const snapshot2 = await paymentsRef.get();
-    if (snapshot2.empty) {
+    const snapshot3 = await paymentsRef.get();
+    if (snapshot3.empty) {
       total_paid = 0;           
     } else{
-        snapshot2.forEach(doc => {        
+        snapshot3.forEach(doc => {        
             total_paid += doc.data().amount; 
           
             date = doc.data().date; 
