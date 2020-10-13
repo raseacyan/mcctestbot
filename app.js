@@ -732,8 +732,25 @@ const registerUser = async (message, response) => {
 
 const checkStock = async (message, response) => {
 
+    let user_id = '';
 
-    const stocksRef = db.collection('users').doc(currentUser.id).collection('stocks').where("qty", ">", 0);
+    const userRef = db.collection('users');    
+    const snapshot = await userRef.where('viberid', '==', currentUser.id).limit(1).get();
+
+    if (snapshot.empty) {
+        console.log('No such document!');
+        let bot_message1 = new TextMessage(`Click on following link to register`, ); 
+        let bot_message2 = new UrlMessage(APP_URL + '/register/');   
+        response.send(bot_message1).then(()=>{
+            return response.send(bot_message2);
+        });
+    }else{
+        snapshot.forEach(doc => {
+            user_id = doc.id;         
+        });
+     }
+
+    const stocksRef = db.collection('users').doc(user_id).collection('stocks').where("qty", ">", 0);
     const snapshot = await stocksRef.get();
     if (snapshot.empty) {
         let bot_message = new TextMessage(`You have no stock`);    
