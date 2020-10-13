@@ -238,7 +238,7 @@ app.get('/admin/stocklist/:merchant_id', async (req,res) => {
     if (!user.exists) {
       console.log('No such user!');        
     } else {    
-      merchant.merchant_id = user.data().viberid;      
+      merchant.merchant_id = user.id;      
       merchant.merchant_name = user.data().name;
     }
  
