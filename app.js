@@ -824,7 +824,7 @@ const checkBalance = async (message, response) => {
 
        
 
-    const paymentsRef = db.collection('users').doc(currentUser.id).collection('payments').orderBy('date', 'desc').limit(5);
+    const paymentsRef = db.collection('users').doc(user_id).collection('payments').orderBy('date', 'desc').limit(5);
     const snapshot3 = await paymentsRef.get();
     if (snapshot3.empty) {
       total_paid = 0;           
