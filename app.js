@@ -673,74 +673,61 @@ const keyboardReply = (message, response) => {
 
 
 
-const registerUser = async (message, response) => {
+const registerUser = async (message, response) => {   
 
-    console.log('CUID:', currentUser.id);
-    let user;
-
-    const userRef = db.collection('users');
-    //const user = await userRef.where('viberid', '==', currentUser.id).limit(1).get();
-    
-    const snapshot = await userRef.where('viberid', '==', currentUser.id).get();
+    const userRef = db.collection('users');    
+    const snapshot = await userRef.where('viberid', '==', currentUser.id).limit(1).get();
 
     if (snapshot.empty) {
-      console.log('No matching documents.');
-      return;
-    }  
-
-    snapshot.forEach(doc => {
-      user = doc;
-    });
-    
-    if (!user.exists) {
         console.log('No such document!');
         let bot_message1 = new TextMessage(`Click on following link to register`, ); 
         let bot_message2 = new UrlMessage(APP_URL + '/register/');   
         response.send(bot_message1).then(()=>{
             return response.send(bot_message2);
         });
-    } else {
-      console.log('Document data:', user.data());
-      let actionKeyboard = {
-        "Type": "keyboard",
-        "Revision": 1,
-        "Buttons": [
-            {
-                "Columns": 6,
-                "Rows": 1,
-                "BgColor": "#2db9b9",
-                "BgMediaType": "gif",
-                "BgMedia": "http://www.url.by/test.gif",
-                "BgLoop": true,
-                "ActionType": "reply",
-                "ActionBody": "my-stock",               
-                "Text": "My Stock",
-                "TextVAlign": "middle",
-                "TextHAlign": "center",
-                "TextOpacity": 60,
-                "TextSize": "regular"
-            },
-            {
-                "Columns": 6,
-                "Rows": 1,
-                "BgColor": "#2db9b9",
-                "BgMediaType": "gif",
-                "BgMedia": "http://www.url.by/test.gif",
-                "BgLoop": true,
-                "ActionType": "reply",
-                "ActionBody": "my-balance",               
-                "Text": "My Balance",
-                "TextVAlign": "middle",
-                "TextHAlign": "center",
-                "TextOpacity": 60,
-                "TextSize": "regular"
-            },            
-        ]
-    };
+    }else{
+        
+          let actionKeyboard = {
+            "Type": "keyboard",
+            "Revision": 1,
+            "Buttons": [
+                {
+                    "Columns": 6,
+                    "Rows": 1,
+                    "BgColor": "#2db9b9",
+                    "BgMediaType": "gif",
+                    "BgMedia": "http://www.url.by/test.gif",
+                    "BgLoop": true,
+                    "ActionType": "reply",
+                    "ActionBody": "my-stock",               
+                    "Text": "My Stock",
+                    "TextVAlign": "middle",
+                    "TextHAlign": "center",
+                    "TextOpacity": 60,
+                    "TextSize": "regular"
+                },
+                {
+                    "Columns": 6,
+                    "Rows": 1,
+                    "BgColor": "#2db9b9",
+                    "BgMediaType": "gif",
+                    "BgMedia": "http://www.url.by/test.gif",
+                    "BgLoop": true,
+                    "ActionType": "reply",
+                    "ActionBody": "my-balance",               
+                    "Text": "My Balance",
+                    "TextVAlign": "middle",
+                    "TextHAlign": "center",
+                    "TextOpacity": 60,
+                    "TextSize": "regular"
+                },            
+            ]
+        };
 
-      let bot_message3 = new TextMessage(`You are already registered`, actionKeyboard);    
-      response.send(bot_message3);
-    }    
+          let bot_message3 = new TextMessage(`You are already registered`, actionKeyboard);    
+          response.send(bot_message3);
+    }  
+  
 }
 
 const checkStock = async (message, response) => {
