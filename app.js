@@ -751,15 +751,15 @@ const checkStock = async (message, response) => {
      }
 
     const stocksRef = db.collection('users').doc(user_id).collection('stocks').where("qty", ">", 0);
-    const snapshot = await stocksRef.get();
-    if (snapshot.empty) {
+    const snapshot2 = await stocksRef.get();
+    if (snapshot2.empty) {
         let bot_message = new TextMessage(`You have no stock`);    
         response.send(bot_message);
     }  
 
  
     let stock_message = '';
-    snapshot.forEach(doc => {
+    snapshot2.forEach(doc => {
   
         
         batch = doc.data().batch;
