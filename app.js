@@ -168,7 +168,7 @@ app.get('/admin/addstock/:merchant_id', async (req,res) => {
     if (!user.exists) {
       console.log('No such user!');        
     } else {      
-      data.merchant_id = user.data().viberid; 
+      data.merchant_id = user.id; 
       data.merchant_name = user.data().name;
     }
     res.render('addstock.ejs', {data:data}); 
