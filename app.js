@@ -84,19 +84,6 @@ app.get('/',function(req,res){
     res.send('your app is up and running');
 });
 
-app.get('/addstock/:fruit',function(req,res){ 
-     let fruit = req.params.fruit;   // $_GET['fruit']
-
-     res.render('addstock2.ejs', {F: fruit});
-});
-
-app.post('/addstock',function(req,res){    
-     let name = req.body.name;  // $_POST['name']
-     let email = req.body.email // $_POST['email']
-    // res.send('your name is: ' + name + " and your email is " + email);
-    res.json({name:name, email:email});
-});
-
 
 app.get('/register',function(req,res){   
       let data = {
