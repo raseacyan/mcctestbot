@@ -510,11 +510,19 @@ bot.onTextMessage(/^hi|hello$/i, (message, response) =>
     response.send(new TextMessage(`Hi there ${response.userProfile.name}. I am robot`)));
  */
 bot.onTextMessage(/^admin@/i, (message, response) => {
-    const text = message.text.toLowerCase();
-     
-    let pw_enter = text.substring(6);
+    const text = message.text; 
+    let bot_message;
 
-    console.log('YOUR ENTERED PW: '+pw_enter);
+    let pw_enter = text.substring(6);
+    
+    if(pw_enter == process.env.ADMIN_PW){
+        bot_message = new TextMessage(`Welcome Admin`);    
+        
+    }else{
+        askAdminPin(message, response);  
+       
+    }
+    response.send(bot_message);
 
 });
 
