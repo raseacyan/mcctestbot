@@ -511,8 +511,10 @@ bot.onTextMessage(/^hi|hello$/i, (message, response) =>
  */
 bot.onTextMessage(/^admin@/i, (message, response) => {
     const text = message.text.toLowerCase();
-    console.log('ADMINMESSAGE:', message);   
-}   
+    console.log('ADMINMESSAGE:', message); 
+});
+    
+    
 
 
 
