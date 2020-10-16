@@ -508,10 +508,12 @@ bot.onConversationStarted((userProfile, isSubscribed, context) =>
 /*
 bot.onTextMessage(/^hi|hello$/i, (message, response) =>
     response.send(new TextMessage(`Hi there ${response.userProfile.name}. I am robot`)));
-
-bot.onTextMessage(/^mingalarbar$/i, (message, response) =>
-    response.send(new TextMessage(`Mingalarbar. Welcome to MCC`)));
  */
+bot.onTextMessage(/^admin@/i, (message, response) => {
+    const text = message.text.toLowerCase();
+    console.log('ADMINMESSAGE:', message);   
+}   
+
 
 
 
@@ -529,6 +531,9 @@ bot.onTextMessage(/./, (message, response) => {
 
     
     switch(text){
+        case "admin":
+            askAdminPin(message, response);
+            break;
         case "register":
             registerUser(message, response);
             break;
@@ -673,6 +678,13 @@ const keyboardReply = (message, response) => {
 
 
 
+const askAdminPin = (message, response) => {
+    let bot_message = new TextMessage(`Please enter admin password`);    
+    response.send(bot_message);
+}
+
+
+
 const registerUser = async (message, response) => {   
 
     const userRef = db.collection('users');    
@@ -736,6 +748,8 @@ const checkStock = async (message, response) => {
 
     const userRef = db.collection('users');    
     const snapshot = await userRef.where('viberid', '==', currentUser.id).limit(1).get();
+
+
 
     if (snapshot.empty) {
         console.log('No such document!');
