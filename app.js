@@ -512,13 +512,13 @@ bot.onTextMessage(/^hi|hello$/i, (message, response) =>
 bot.onTextMessage(/^admin@/i, (message, response) => {
     const text = message.text.toLowerCase();
      
-    let pw_enter = str.substring(6);
+    let pw_enter = text.substring(6);
 
     console.log('YOUR ENTERED PW: '+pw_enter);
 
 });
-    
-    
+
+
 
 
 
